@@ -1,15 +1,7 @@
 version: '2'
 
 services:
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    container_name: matcha_nginx
-
+  
   server_dev:
     container_name: matcha_server_dev
     build: ./server/
@@ -22,6 +14,7 @@ services:
     command: "nodemon ./bin/www --inspect --legacy-watch"
     links:
       - "mysql:matcha_phpmyadmin"
+      
   
   mysql:
     image: mysql:5.7
@@ -44,7 +37,6 @@ services:
       PMA_HOST: mysql
       VIRTUAL_HOST: phpmyadmin.matcha.local  
     container_name: matcha_phpmyadmin
-
 
   client_dev:
     container_name: natcha_app

@@ -1,0 +1,81 @@
+Project goal: creating a dating website
+ddl: July15th
+any language, any framework and libraries
+========================================
+1. Built-in web server:
+A web server processes incoming network
+ requests over HTTP and several other 
+ related protocols. The primary function 
+ of a web server is to store, process and 
+ deliver web pages to clients. 
+ The communication between client and 
+ server takes place using the Hypertext 
+ Transfer Protocol (HTTP).
+/////////////////////////////////////////
+ IV.1 Registration and signing-in 
+ -Register: email, username, last name, first name, protected password
+ -user validation: email, link
+ -login: username and password
+ -forgot password
+ -logout on one click
+/////////////////////////////////////////
+ IV.2 User profile
+1.Profile contents: gender, sexual preferences, biography
+ personal interests with tags (reusable), pictures (max:5, 1 is profile pic)
+
+2.Profile modification 
+-the profile 
+-first name, last name and email
+-***public fame rating ???(definition depends on you as long as it make sense)
+-location (GPS); preference(on/off)
+/////////////////////////////////////////
+IV.3 Browsing -matching 
+-only propose interesting profiles (which means they are matching)
+ i.e men for heterosexual girls
+-manage bisexuality (default if not specified otherwise in profile)
+-Clever matching (priority:geographical location, maximum common tags, maximum "fame rating")
+-Sortable user list: age, localisatin, fame rating and common tags
+-Filterable user list: age, localisation, fame rating and common tags;
+/////////////////////////////////////////
+IV.4 Research (search and sorting by filters)
+-Advanced research following filters:
+ age gap, fame rating gap, location, one or multifple interests tags
+
+-Again: the list must be sortable and filterable by age, location, fame rating and tags
+/////////////////////////////////////////
+IV.5 Profile of other users
+-check others' profiles (contain all available public info except the private password and email)
+-***Picture like: userA <=>userB = "connected" ???
+ (only when both of the users have pictures, if either of them don't have pics, then not possible)
+-be able to check fame rating
+-status: online or last connection (date and time) -last seen...
+-***make reports on "Fake account" ???
+-block a user (won't appear in the research result, no more notification)
+
+-***Be able to check connection status, and unlike(disconnect) a profile
+ friend and unfriend
+/////////////////////////////////////////
+ IV.6 Chat (how to implement depends on you)
+ -Connected users can chat in real time
+ -new message notification can be seen on any pages (global)
+
+/////////////////////////////////////////
+IV.7 Notifications (in real time)
+-received a "like"
+-profile has been checked 
+-received a new message
+-a “liked” user "liked" back
+-a connected user "unliked" you
+-unread notificaiton can been seen from any page.
+
+///////////////////////////////////////////
+Bonus:
+Only evaluated when the mandatory part is EXCELLENT
+
+1.Omniauch-connection
+2.Import pictures
+3.Interactive map of the users.
+
+**********************************************************************************
+ 
+

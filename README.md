@@ -82,7 +82,7 @@ Edit your `/etc/hosts` file:
 
 ```bash
 # environment variables
-cp .env-template .env
+
 ```
 
 - Navigate to /backend path 
@@ -162,7 +162,7 @@ this good practise is to avoid merge conflicts (correct them if there are any :)
 ##### Nice to know
 - We dont-use Jquery within JSX components.
 - Either react-boostrap packages or ChartJs/react-chartJs
-
+*ı***
 ### Help
 
 If you face this error message in backend "no space left"

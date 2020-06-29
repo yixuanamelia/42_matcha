@@ -1,8 +1,8 @@
 import React from "react";
 
-import './Signin.css';
+import './Signup.css';
 
-class Signin extends React.Component {
+class Signup extends React.Component {
 
     render() {
         return (
@@ -70,7 +70,7 @@ class Signin extends React.Component {
 							</button>
                                 </div>
 
-                                <a href="#" className="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                                <a href="/login" className="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
                                     Sign in
 							<i className="fa fa-long-arrow-right m-l-5"></i>
                                 </a>
@@ -83,4 +83,4 @@ class Signin extends React.Component {
     }
 };
 
-export default Signin;
+export default Signup;

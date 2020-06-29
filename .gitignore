@@ -1,7 +1,7 @@
 data/
 *.swp
 *.vim
-.docker
+/.docker
 commit_msg_template
 server/package-lock.json
 server/docker

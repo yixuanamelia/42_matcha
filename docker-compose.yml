@@ -39,7 +39,7 @@ services:
     container_name: matcha_phpmyadmin
 
   client_dev:
-    container_name: natcha_app
+    container_name: matcha_app
     build: client/
     environment:
       - VIRTUAL_HOST=app.matcha.local

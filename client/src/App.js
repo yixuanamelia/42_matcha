@@ -8,7 +8,7 @@ import {
 
 // Import pages
 import Login from "./components/pages/Login/Login";
-import Signin from './components/pages/Signin/Signin'
+import Signup from './components/pages/Signup/Signup'
 
 require('dotenv').config();
 
@@ -18,7 +18,8 @@ function App() {
     <div className="row">
       <Router>
         <Switch>
-          <Route exact path="/" component={Signin} />
+          <Route exact path="/" component={Signup} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
     </div>

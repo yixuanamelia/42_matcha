@@ -12,7 +12,7 @@
     "cloudinary": "^1.13.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "dotenv": "^6.0.0",
+    "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "email-templates": "^2.7.1",
     "express": "~4.16.0",

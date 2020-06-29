@@ -47,7 +47,7 @@ class Login extends React.Component {
                         Sign In
 							</button>
                     </div>
-                    <a href="#" className="txt2 hov1">
+                    <a href="/forgotPass" className="txt2 hov1">
                       Forgot Password?
 									</a>
                   </div>

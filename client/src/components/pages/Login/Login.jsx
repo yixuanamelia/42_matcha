@@ -1,6 +1,11 @@
 import React from "react";
 
 class Login extends React.Component {
+// Like in Signin add state for the needed variables : username/email + password
+// Create a funciton for validation like in signin
+// Create a submit function like in signin
+// Create a service file like in Signin
+// in the login.service make an axios call to /users/login and send the needed data
 
 
   render() {

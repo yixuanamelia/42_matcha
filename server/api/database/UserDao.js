@@ -9,6 +9,16 @@ module.exports = class userDao {
         this.userId = userId;
     }
 
+    execQuery(queryEntiity) {
+        return new Promise((resolve, reject) => {
+            db.query(queryEntiity, function (error, result) {
+                if (error) throw error;
+                console.log('QUERY EXECUTED SUCCESSFULLY');
+                resolve(result);
+            });
+        })
+    }
+
     async getAlluserLikedThisUser() {
         return new Promise(async (resolve, reject) => {
             let ids = [];
@@ -22,5 +32,31 @@ module.exports = class userDao {
             resolve(ids);
         })
     }
-    return;
+
+    async userExist(emailOrUsernameOruserId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [isNaN(parseInt(emailOrUsernameOruserId)) ? 0 : parseInt(emailOrUsernameOruserId), emailOrUsernameOruserId, emailOrUsernameOruserId])
+            let response = await this.execQuery(preparedQuery);
+            response.length === 0 ? resolve(false) : resolve(true);
+        })
+    }
+
+    async getAccountValidationToken() {
+        return new Promise((resolve, reject) => {
+            resolve([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        })
+    }
+
+    async insert(data, activationToken) {
+        let pwd = await hashPwd.hashPassword(data.password);
+        let query = `INSERT INTO user (pseudo, lastname, firstname, password, email, activation_token) \
+        VALUES (?, ?, ?, ?, ?, ?)`;
+        let preparedQuery = await prepareQuery.prepareQuery(query, [data.pseudonyme, data.lastname, data.firstname, pwd, data.email, activationToken])
+        await this.execQuery(preparedQuery);
+    }
+
+
 }

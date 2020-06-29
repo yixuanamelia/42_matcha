@@ -5,5 +5,3 @@ export const fireNotification  = (style, msg) => {
         position: toast.POSITION.TOP_RIGHT
     })
 }
-
-

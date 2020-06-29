@@ -11,6 +11,8 @@ import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';
 import ForgotPass from './components/pages/ForgotPass/ForgotPass';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 require('dotenv').config();
 
 function App() {

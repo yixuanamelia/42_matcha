@@ -2,7 +2,7 @@ import React from "react";
 
 import './Signup.css';
 import { ToastContainer } from 'react-toastify';
-import signupUser from './Signin.service';
+import signupUser from './Signup.service';
 const customNotification = require('../utils/notification');
 
 class Signup extends React.Component {

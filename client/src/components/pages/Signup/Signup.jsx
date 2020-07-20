@@ -45,6 +45,7 @@ class Signup extends React.Component {
 
     valdateFormData() {
         let validateEmail = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g);
+        let validatePass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         if (this.state.password !== this.state.confPassword) {
             customNotification.fireNotification("warning", "Passwords does not match")
             return false;
@@ -54,6 +55,8 @@ class Signup extends React.Component {
         } else if (!validateEmail.test(this.state.email)) {
             customNotification.fireNotification("warning", "Email not valid")
             return false;
+        } else if (!validatePass.test(this.state.password)) {
+            customNotification.fireNotification("warning", "Password not valid")
         }
         return true;
     }

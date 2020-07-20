@@ -1,7 +1,9 @@
 import React from "react";
-
-// Import service
+import './login.css';
 import signinUser from './Signin.service';
+import { ToastContainer } from 'react-toastify';
+const customNotification = require('../utils/notification');
+
 
 class Login extends React.Component {
   // Like in Signin add state for the needed variables : username/email + password
@@ -34,15 +36,25 @@ class Login extends React.Component {
       password: this.state.password
     }
 
-    
-    // Sumbit/post to server
-    let response = await signinUser(data);
-    
+    if (this.valdateFormData()) {
+      // Sumbit/post to server
+      let response = await signinUser(data);
+    }
   }
 
   // Create a funciton for validation like in signin
   // Password and email are valid
-
+  valdateFormData() {
+    let validateEmail = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g);
+    let validatePass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    if (!validateEmail.test(this.state.usernameOrEmail)) {
+      customNotification.fireNotification("warning", "Email not valid")
+      return false;
+    } else if (!validatePass.test(this.state.password)) {
+      customNotification.fireNotification("warning", "Password not valid")
+    }
+    return true;
+  }
 
   // Create a submit function like in signin
   // post the information
@@ -54,6 +66,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="limiter">
+        <ToastContainer />
         <div className="container-login100">
           <div className="login100-more"></div>
 

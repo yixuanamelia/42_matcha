@@ -1,8 +1,8 @@
 import axios from "axios/index";
 
-export default function signupUser(data) {
+export default function signinUser(data) {
     return new Promise((resolve, reject) => {
-        axios.post(process.env.REACT_APP_API_URL + "/users/register", data)
+        axios.post(process.env.REACT_APP_API_URL + "/users/login", data)
             .then(results => {
                 resolve(results.data);
             })
@@ -11,3 +11,5 @@ export default function signupUser(data) {
             });
     })
 };
+
+

@@ -3,6 +3,7 @@ const verifyPwd = require('../../utils/passwordMatchVerification');
 const genJwtToke = require('../../utils/generateJwtToken');
 
 async function loginUserAuth(userInfo, res) {
+    
     let user = new userDao();
     if (await user.userExist(userInfo.email)) {
         let userData = await user.getUserByEmailOrUsernameOrId(userInfo.email);

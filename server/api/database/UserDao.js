@@ -19,6 +19,15 @@ module.exports = class userDao {
         })
     }
 
+    async getUserByEmailOrUsernameOrId(emailOrUsername) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [isNaN(parseInt(emailOrUsername)) ? 0 : parseInt(emailOrUsername), emailOrUsername, emailOrUsername])
+            let response = await this.execQuery(preparedQuery);
+            resolve(response);
+        })
+    }
+
     async getAlluserLikedThisUser() {
         return new Promise(async (resolve, reject) => {
             let ids = [];
@@ -58,5 +67,32 @@ module.exports = class userDao {
         await this.execQuery(preparedQuery);
     }
 
+    is_Numeric(num) {
+        return !isNaN(parseFloat(num)) && isFinite(num);
+    }
+    
+    updateUserOnline(state, userId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "";
+            let preparedQuery = "";
+            var date = new Date();
+            let infoDate = date.toISOString().split('T')[0] + ' '
+                + date.toTimeString().split(' ')[0];
+
+            if (this.is_Numeric(userId)) {
+                query = "UPDATE user SET online=?, updatedAt=? WHERE id=?";
+                preparedQuery = await prepareQuery.prepareQuery(query, [state, infoDate, userId])
+            } else {
+                query = "UPDATE user SET online=?, updatedAt=? WHERE email=? OR pseudo=?";
+                preparedQuery = await prepareQuery.prepareQuery(query, [state, infoDate, userId, userId])
+            }
+
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
+    }
 
 }

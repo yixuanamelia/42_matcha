@@ -14,9 +14,9 @@ class Navbar extends React.Component {
           <a href="#default" class="logo">Matcha</a>
           <div class="header-right">
             <a class="active" href="#home">Home</a>
-            <a href="#login">Login</a>
-            <a href="#register">Register</a>
-            <a href="#about">About</a>
+            <a href="#login">Notification</a>
+            <a href="#register">Chatroom</a>
+            <a href="/logout">Logout</a>
           </div>
         </div>
       </>

@@ -12,8 +12,14 @@ restUserPassword = (req, res, next) => {
     userService.resetPassword.resetPassword(req.body.emailOrUsername, res)
 }
 
+activateUserAccount = (req, res, next) => {
+    let activationToken = req.params.token;
+    userService.activateAccount.activateAccount(activationToken, res)
+}
+
 module.exports = {
     restUserPassword,
+    activateUserAccount,
     loginUser,
     registerUser
 }

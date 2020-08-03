@@ -19,6 +19,32 @@ module.exports = class userDao {
         })
     }
 
+    updateActivateAccount(email) {
+        return new Promise(async (resolve, reject) => {
+            let query = "UPDATE user SET validated=1 WHERE email=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [email])
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
+    }
+
+    async activateAccount(email, activationToken) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if ((await this.userExist(email)) === true)
+                    resolve(await this.updateActivateAccount(email));
+                else
+                    resolve(false)
+            } catch (error) {
+                resolve(false)
+            }
+
+        })
+    }
+
     async getUserByEmailOrUsernameOrId(emailOrUsername) {
         return new Promise(async (resolve, reject) => {
             let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";

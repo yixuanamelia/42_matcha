@@ -60,4 +60,10 @@ router.post('/register', userController.registerUser);
  */
 router.put('/resetpwd', userController.restUserPassword);
 
+/*
+ * API [GET] for roure /users/validateaccount/:token
+ */
+router.get('/validateaccount/:token', userController.activateUserAccount);
+
+
 module.exports = router;

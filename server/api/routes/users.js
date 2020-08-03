@@ -55,4 +55,9 @@ router.post('/login', userController.loginUser);
  */
 router.post('/register', userController.registerUser);
 
+/*
+ * API [PUT] for roure /users/resetpwd
+ */
+router.put('/resetpwd', userController.restUserPassword);
+
 module.exports = router;

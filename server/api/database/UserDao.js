@@ -42,6 +42,15 @@ module.exports = class userDao {
         })
     }
 
+    resetPasswod(email) {
+        return new Promise(async (resolve, reject) => {
+            let newPwd = await hashPwd.generateRandomPassword();
+            let response = await this.updateUserPassword(newPwd, email);
+            resolve(response === true ?
+                newPwd : false);
+        })
+    }
+
     async userExist(emailOrUsernameOruserId) {
         return new Promise(async (resolve, reject) => {
             let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";

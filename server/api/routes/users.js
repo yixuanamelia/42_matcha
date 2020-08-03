@@ -65,5 +65,14 @@ router.put('/resetpwd', userController.restUserPassword);
  */
 router.get('/validateaccount/:token', userController.activateUserAccount);
 
+/*
+ * API [GET] for roure /users/:userId/user/:sourceUserId
+ */
+router.get('/:userId/user/:sourceUserId', authCkeck, upload.any(), userController.getProfileInfo);
+ 
+/*
+ * API [GET] for roure /users/current/:userId
+ */
+router.get('/current/:userId', authCkeck, userController.getCurrentProfileInfo);
 
 module.exports = router;

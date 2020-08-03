@@ -17,9 +17,25 @@ activateUserAccount = (req, res, next) => {
     userService.activateAccount.activateAccount(activationToken, res)
 }
 
+getProfileInfo = (req, res, next) => {
+    let userId = req.params.userId;
+    let sourceUserId = req.params.sourceUserId;
+
+    userService.getUserInfoService.getUserInfo(sourceUserId, userId, res);
+}
+
+
+getCurrentProfileInfo = (req, res, next) => {
+    let userId = req.params.userId;
+
+    userService.getUserInfoService.getCurrentUserInfo(userId, res);
+}
+
 module.exports = {
     restUserPassword,
     activateUserAccount,
+    getCurrentProfileInfo,
     loginUser,
+    getProfileInfo,
     registerUser
 }

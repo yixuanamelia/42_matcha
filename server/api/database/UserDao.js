@@ -77,6 +77,19 @@ module.exports = class userDao {
         })
     }
 
+    updateUserPassword(pwd, email) {
+        return new Promise(async (resolve, reject) => {
+            let cryptPwd = await hashPwd.hashPassword(pwd);
+            let query = "UPDATE user SET password=? WHERE email=? OR pseudo=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [cryptPwd, email, email])
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
+    }
+
     async userExist(emailOrUsernameOruserId) {
         return new Promise(async (resolve, reject) => {
             let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";

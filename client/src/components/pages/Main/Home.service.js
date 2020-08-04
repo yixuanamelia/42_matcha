@@ -260,7 +260,7 @@ async function AddDistance(userList) {
 }
 
 export function fetchAllUsersPublicData(filter) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
 

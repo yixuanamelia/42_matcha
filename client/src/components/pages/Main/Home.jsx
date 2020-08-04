@@ -27,7 +27,8 @@ class Home extends React.Component {
 
     async UNSAFE_componentWillMount() {
         let userData = await fetchAllUsersPublicData([]);
-        this.initUsers(userData.data);
+        console.log("userData :", userData);
+        this.initUsers(userData);
 
         const userId = localStorage.getItem("userId");
         let userInterest = await GetUserIntrests(userId);
@@ -107,6 +108,7 @@ class Home extends React.Component {
 
     render() {
         let filteredUsers = this.state.userBuffer;
+
         return (
             <div className="content-wrapper">
                 <Navbar />

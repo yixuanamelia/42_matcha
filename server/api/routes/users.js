@@ -80,5 +80,9 @@ router.get('/current/:userId', authCkeck, userController.getCurrentProfileInfo);
  */
 router.get('/publicData/:userId', userController.fetchAllUsersPublicData);
 
+/*
+ * API [GET] for roure /users/interests/:userId
+ */
+router.get('/interests/:userId', authCkeck, userController.getUserInterests);
 
 module.exports = router;

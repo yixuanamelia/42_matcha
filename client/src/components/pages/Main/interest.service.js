@@ -1,6 +1,6 @@
 import axios from "axios/index";
 
-export function GetUserIntrests(token, userId, dispatch) {
+export function GetUserIntrests(userId) {
     return new Promise(async (resolve, reject) => {
         const token = localStorage.getItem("token");
 

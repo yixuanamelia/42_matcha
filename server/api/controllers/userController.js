@@ -37,8 +37,15 @@ fetchAllUsersPublicData = (req, res, next) => {
 }
 
 
+getUserInterests = (req, res, next) => {
+    let userId = req.params.userId;
+    userService.getUserInterestService.getUserInterest(userId, res);
+}
+
+
 module.exports = {
     restUserPassword,
+    getUserInterests,
     activateUserAccount,
     getCurrentProfileInfo,
     loginUser,

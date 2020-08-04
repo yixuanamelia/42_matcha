@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 const rateLimiter = require('express-rate-limit-middleware').rateLimit
 const initDatabase = require('./config/dbInitTables');
 const helmet = require('helmet');
-//var seed = require('./api/database/seed/user_seed');
+var seed = require('./api/database/seed/user_seed');
 
 // Main app
 var app = express();
@@ -60,7 +60,7 @@ db.connect(function (err) {
 });
 
 // Database tables initiation
-//initDatabase.initDatabaseTables(db)
+// initDatabase.initDatabaseTables(db)
 
 // Database tables seed
 // seed(db);

@@ -18,4 +18,13 @@ module.exports = class tagsDao {
         })
     }
 
+    async getAllTags() {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT * FROM interests WHERE deleted=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, ['0'])
+            let response = await utils.execQuery(preparedQuery);
+            resolve(response);   
+        })
+    }
+    
 }

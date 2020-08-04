@@ -39,7 +39,7 @@ export class UserItem extends Component {
                     {hobbies.map((hobbie, i) => i < 3 && <h5 className="card-subtitle" style={{ borderRadius: '5px', border: '1px solid gainsboro', padding: '1px' }} key={i}>{hobbie.substr(0, 10) !== hobbie ? hobbie.substr(0, 10) + '...' : hobbie}</h5>)}
                 </nav>
                 <p style={{ height: '4rem' }}>{description.substr(0, 40) === description ? description : description.substr(0, 40) + '...'}</p>
-                <Link to={"/profiledetail/" + this.props.user.id} onClick={this.props.navigateTo.bind(this, '/profiledetail/' + this.props.user.id)}>
+                <Link to={"/profiledetail/" + this.props.user.id} >
                     <button className="btn btn-secondary btn-block" style={{ backgroundColor: '#fcbde6' }}>See more</button>
                 </Link>
             </div>

@@ -2,56 +2,17 @@
 const db = require('../../config/dbConnection');
 const hashPwd = require('../utils/hashPwd');
 const prepareQuery = require('../utils/prepareQuery');
+const LikeDao = require('./LikeDao');
+const DislikeDao = require('./DislikeDao');
+const BlockDao = require('./BlockDao');
+const VisitDao = require('./VisitDao');
+const reportDao = require("./ReportDao");
+const PictureDao = require('./PictureDao');
 
 module.exports = class userDao {
 
     constructor(userId) {
         this.userId = userId;
-    }
-
-    execQuery(queryEntiity) {
-        return new Promise((resolve, reject) => {
-            db.query(queryEntiity, function (error, result) {
-                if (error) throw error;
-                console.log('QUERY EXECUTED SUCCESSFULLY');
-                resolve(result);
-            });
-        })
-    }
-
-    updateActivateAccount(email) {
-        return new Promise(async (resolve, reject) => {
-            let query = "UPDATE user SET validated=1 WHERE email=?";
-            let preparedQuery = await prepareQuery.prepareQuery(query, [email])
-            let response = await this.execQuery(preparedQuery);
-            if (response.affectedRows !== undefined && response.affectedRows === 1)
-                resolve(true);
-            else
-                resolve(false);
-        })
-    }
-
-    async activateAccount(email, activationToken) {
-        return new Promise(async (resolve, reject) => {
-            try {
-                if ((await this.userExist(email)) === true)
-                    resolve(await this.updateActivateAccount(email));
-                else
-                    resolve(false)
-            } catch (error) {
-                resolve(false)
-            }
-
-        })
-    }
-
-    async getUserByEmailOrUsernameOrId(emailOrUsername) {
-        return new Promise(async (resolve, reject) => {
-            let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";
-            let preparedQuery = await prepareQuery.prepareQuery(query, [isNaN(parseInt(emailOrUsername)) ? 0 : parseInt(emailOrUsername), emailOrUsername, emailOrUsername])
-            let response = await this.execQuery(preparedQuery);
-            resolve(response);
-        })
     }
 
     async getAlluserLikedThisUser() {
@@ -68,20 +29,160 @@ module.exports = class userDao {
         })
     }
 
-    resetPasswod(email) {
+    async hasBeenLikedByThisUser(id) {
         return new Promise(async (resolve, reject) => {
-            let newPwd = await hashPwd.generateRandomPassword();
-            let response = await this.updateUserPassword(newPwd, email);
-            resolve(response === true ?
-                newPwd : false);
+            let query = "SELECT * FROM `like` WHERE has_been_liked_user_id=? AND liker_user_id=?;";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [parseInt(id), parseInt(this.userId)])
+            let response = await this.execQuery(preparedQuery);
+            response.length > 0 ?
+                resolve(id)
+                : resolve(-1)
         })
     }
 
-    updateUserPassword(pwd, email) {
+    async getmutualLikedThisUser(ids) {
         return new Promise(async (resolve, reject) => {
-            let cryptPwd = await hashPwd.hashPassword(pwd);
-            let query = "UPDATE user SET password=? WHERE email=? OR pseudo=?";
-            let preparedQuery = await prepareQuery.prepareQuery(query, [cryptPwd, email, email])
+            let i = 0;
+            let chatUsersIds = [];
+
+            while (i < ids.length) {
+                if (await this.hasBeenLikedByThisUser(ids[i]) !== -1)
+                    chatUsersIds.push(ids[i]);
+                i++;
+            }
+
+            resolve(chatUsersIds)
+        })
+    }
+
+
+    async getUserInfo(ids) {
+        return new Promise(async (resolve, reject) => {
+            let i = 0;
+            let picture = new PictureDao(-1)
+            let userSList = [];
+
+            while (i < ids.length) {
+                userSList.push({
+                    userId: ids[i],
+                    fullname: await this.getUserFullname(ids[i]),
+                    profilePhoto: await picture.getPictureByUserIdAndState(ids[i], 1)
+                });
+                i++;
+            }
+
+            resolve(userSList)
+        })
+    }
+
+    async getChatContact() {
+        return new Promise(async (resolve, reject) => {
+            let usersLikedThisUserIds = await this.getAlluserLikedThisUser();
+            let mutualLikedThisUser = await this.getmutualLikedThisUser(usersLikedThisUserIds);
+            let getUsersInfo = await this.getUserInfo(mutualLikedThisUser);
+
+            resolve(getUsersInfo);
+        })
+    }
+
+    async insert(data, activationToken) {
+        let pwd = await hashPwd.hashPassword(data.password);
+        let query = `INSERT INTO user (pseudo, lastname, firstname, password, email, activation_token) \
+        VALUES (?, ?, ?, ?, ?, ?)`;
+        let preparedQuery = await prepareQuery.prepareQuery(query, [data.pseudonyme, data.lastname, data.firstname, pwd, data.email, activationToken])
+        await this.execQuery(preparedQuery);
+    }
+
+    async calculateUserFame(userId) {
+        return new Promise(async (resolve, reject) => {
+            // formula : fame : like + visit - dislike - report(4) - block(2)
+            let like = new LikeDao(userId);
+            let dislike = new DislikeDao(userId);
+            let block = new BlockDao(userId);
+            let visit = new VisitDao(userId);
+            let report = new reportDao(userId);
+
+            let countLike = await like.countLikesByUserId();
+            let countDislike = await dislike.countDislikesByUserId();
+            let countBlock = await block.countBlokesByUserId();
+            let countVisit = await visit.countVisitsByUserId();
+            let countReport = await report.countReportByUserId();
+
+            let fame = (countLike + countVisit) - (countDislike + (countBlock * 2) + (countReport * 4));
+
+            //Update user fame
+            resolve(await this.updateUserFame(fame, userId));
+        })
+    }
+
+    async updateUserFame(fame, userId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "UPDATE user SET fame=? WHERE id=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [parseInt(fame), parseInt(userId)])
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
+    }
+
+    calculateProfileCompletion(userId, data) {
+        return new Promise(async (resolve, reject) => {
+            let i = 0;
+            let picture = new PictureDao(userId);
+
+            let picturesProfile = await picture.getPictureByUserIdAndState(userId, 1);
+            let otherPics = await picture.getPictureByUserIdAndState(userId, 1);
+            if (data.psudonym.trim() !== "") i++;
+            if (data.lastname.trim() !== "") i++;
+            if (data.firstname.trim() !== "") i++;
+            if (parseInt(data.age) !== 0) i++;
+            if (data.Bibliography.trim() !== "") i++;
+            if (data.gender.trim() !== "") i++;
+            if (data.SexualOrientation.trim() !== "") i++;
+            if (data.location !== "") i++;
+            if (data.tags && data.tags.length > 0) i++;
+            if (picturesProfile !== "") i++;
+            if (otherPics !== "") i++;
+
+            resolve(i);
+        })
+    }
+
+    async getUserPassword(userId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT password FROM user WHERE id=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [userId])
+            let response = await this.execQuery(preparedQuery);
+            resolve(response[0].password);
+        })
+    }
+
+    async getUserFullname(userId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT concat(user.lastname, ' ', user.firstname) as fullname FROM user WHERE id=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [userId])
+            let response = await this.execQuery(preparedQuery);
+            resolve(response[0].fullname);
+        })
+    }
+
+    updateUserProfile(data, userId) {
+        return new Promise(async (resolve, reject) => {
+            let pwd = "";
+            if (data.Password !== "")
+                pwd = await hashPwd.hashPassword(data.Password);
+            else
+                pwd = await this.getUserPassword(userId);
+            let profileComplete = await this.calculateProfileCompletion(userId, data);
+            let query = "UPDATE user SET \
+            pseudo=?, lastname=?, firstname=?, password=?, email=?, age=?, bio=? \
+            , gender=?, sexual_orientation=?, localisation=?, profile_completion=? WHERE id=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query,
+                [data.psudonym, data.lastname, data.firstname, pwd, data.email
+                    , isNaN(parseInt(data.age)) ? 0 : parseInt(data.age), data.Bibliography, data.gender,
+                data.SexualOrientation, data.location, profileComplete, userId])
             let response = await this.execQuery(preparedQuery);
             if (response.affectedRows !== undefined && response.affectedRows === 1)
                 resolve(true);
@@ -99,26 +200,31 @@ module.exports = class userDao {
         })
     }
 
-    async getAccountValidationToken() {
-        return new Promise((resolve, reject) => {
-            resolve([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-            );
+    async getUserByEmailOrUsernameOrId(emailOrUsername) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT * FROM user WHERE id=? OR email=? OR pseudo=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [isNaN(parseInt(emailOrUsername)) ? 0 : parseInt(emailOrUsername), emailOrUsername, emailOrUsername])
+            let response = await this.execQuery(preparedQuery);
+            resolve(response);
         })
     }
 
-    async insert(data, activationToken) {
-        let pwd = await hashPwd.hashPassword(data.password);
-        let query = `INSERT INTO user (pseudo, lastname, firstname, password, email, activation_token) \
-        VALUES (?, ?, ?, ?, ?, ?)`;
-        let preparedQuery = await prepareQuery.prepareQuery(query, [data.pseudonyme, data.lastname, data.firstname, pwd, data.email, activationToken])
-        await this.execQuery(preparedQuery);
+    updateActivateAccount(email) {
+        return new Promise(async (resolve, reject) => {
+            let query = "UPDATE user SET validated=1 WHERE email=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [email])
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
     }
 
     is_Numeric(num) {
         return !isNaN(parseFloat(num)) && isFinite(num);
     }
-    
+
     updateUserOnline(state, userId) {
         return new Promise(async (resolve, reject) => {
             let query = "";
@@ -142,6 +248,61 @@ module.exports = class userDao {
                 resolve(false);
         })
     }
+
+    updateUserPassword(pwd, email) {
+        return new Promise(async (resolve, reject) => {
+            let cryptPwd = await hashPwd.hashPassword(pwd);
+            let query = "UPDATE user SET password=? WHERE email=? OR pseudo=?";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [cryptPwd, email, email])
+            let response = await this.execQuery(preparedQuery);
+            if (response.affectedRows !== undefined && response.affectedRows === 1)
+                resolve(true);
+            else
+                resolve(false);
+        })
+    }
+
+    resetPasswod(email) {
+        return new Promise(async (resolve, reject) => {
+            let newPwd = await hashPwd.generateRandomPassword();
+            let response = await this.updateUserPassword(newPwd, email);
+            resolve(response === true ?
+                newPwd : false);
+        })
+    }
+
+    async activateAccount(email, activationToken) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if ((await this.userExist(email)) === true)
+                    resolve(await this.updateActivateAccount(email));
+                else
+                    resolve(false)
+            } catch (error) {
+                resolve(false)
+            }
+
+        })
+    }
+
+    execQuery(queryEntiity) {
+        return new Promise((resolve, reject) => {
+            db.query(queryEntiity, function (error, result) {
+                if (error) throw error;
+                console.log('QUERY EXECUTED SUCCESSFULLY');
+                resolve(result);
+            });
+        })
+    }
+
+    async getAccountValidationToken() {
+        return new Promise((resolve, reject) => {
+            resolve([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        })
+    }
+
 
     async fetchAllUsers(userId) {
         return new Promise(async (resolve, reject) => {
@@ -188,9 +349,9 @@ module.exports = class userDao {
                 delete user.image_states;
                 delete user.tag_array_string;
             });
-
             resolve(response);
         })
     }
 
+    return;
 }

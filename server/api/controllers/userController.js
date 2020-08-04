@@ -42,10 +42,21 @@ getUserInterests = (req, res, next) => {
     userService.getUserInterestService.getUserInterest(userId, res);
 }
 
+getUserLikesDislikes = (req, res, next) => {
+    let userId = req.params.userId;
+    userService.getUserLikesDislikesService.getAllUserLikesDislikes(userId, res);
+}
+
+updateUserLikesDislikes = (req, res, next) => {
+    let checker = req.params.checker;
+    userService.updateUserLikesDislikesService.putUserLikesDislikes(checker, req.body, res);
+}
 
 module.exports = {
     restUserPassword,
     getUserInterests,
+    getUserLikesDislikes,
+    updateUserLikesDislikes,
     activateUserAccount,
     getCurrentProfileInfo,
     loginUser,

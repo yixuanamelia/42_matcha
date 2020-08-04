@@ -85,4 +85,10 @@ router.get('/publicData/:userId', userController.fetchAllUsersPublicData);
  */
 router.get('/interests/:userId', authCkeck, userController.getUserInterests);
 
+/*
+ * API [POST] for roure /users/likes/:checker
+ */
+router.post('/likes/:checker', authCkeck, userController.updateUserLikesDislikes);
+
+
 module.exports = router;

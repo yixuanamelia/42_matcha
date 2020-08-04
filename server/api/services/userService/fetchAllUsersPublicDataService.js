@@ -1,4 +1,5 @@
 const UserDao = require('../../database/UserDao');
+// const UtilsDao = require('../../database/utilsDao');
 
 async function fetchAllUsersPublicInfo(userId, res) {
     try {

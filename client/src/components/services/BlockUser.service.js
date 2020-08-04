@@ -1,10 +1,14 @@
 import axios from "axios/index";
 
-function getUserLikes(userId)  {
+export function BlockThisUser(blocked_userId, checker) {
     return new Promise(async (resolve, reject) => {
         const token = localStorage.getItem("token");
-
-        axios.get(process.env.REACT_APP_API_URL + "/users/likes/" + userId, {
+        const blocker_userId = localStorage.getItem("userId");
+       
+        axios.post(process.env.REACT_APP_API_URL + "/users/block", {
+            blocked_userId: blocked_userId,
+            blocker_userId: blocker_userId
+        }, {
             headers: {
                 "Authorization": `Bearer ` + token
             }
@@ -13,9 +17,7 @@ function getUserLikes(userId)  {
                 resolve(results.data)
             })
             .catch(err => {
-                resolve("");
+                resolve(false);
             });
     })
 }
-
-export default getUserLikes;

@@ -44,13 +44,14 @@ async function getUserInfo(sourceUserId, userId, res) {
             msg: "Sorry an error occured !"
         })
     }
-}
 
+}
 
 async function getCurrentUserInfo(userId, res) {
     let user = new UserDao();
     let tags = new TagsDao(userId);
     let pictures = new PicturesDao(userId);
+    let like = new LikeDao(userId);
 
     try {
         // Check user if exist
@@ -86,7 +87,8 @@ async function getCurrentUserInfo(userId, res) {
 
 }
 
+
 module.exports = {
     getUserInfo,
-    getCurrentUserInfo,
+    getCurrentUserInfo
 }

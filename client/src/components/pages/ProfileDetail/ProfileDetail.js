@@ -1,20 +1,20 @@
 import React from "react";
-import Header from "../../common/Header";
-import Sidebar from "../../common/SideBar";
-import Footer from "../../common/Footer";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import { GetUserInfo } from '../../../store/actions/UsersActions/FetchUserInfoAction';
-import { GetUserIntrests } from '../../../store/actions/intrestsActions/GetAllInterestsAction';
-import { GetuserLikes } from '../../../store/actions/UsersActions/GetUserlikesDislikesAction';
-import { PutUpdateUserLikes } from '../../../store/actions/UsersActions/UpdateUserLikeDislikeAction';
-import { BlockThisUser } from "../../../store/actions/UsersActions/BlockUserAction";
-import { VisitThisUser } from '../../../store/actions/UsersActions/VisitUserAction';
+import Navbar from '../common/Navbar/Navbar';
+
+import { GetUserInfo } from '../../services/FetchUserInfo.service';
+import { GetUserIntrests } from '../Main/interest.service';
+import getUserLikes from '../../services/GetUserlikesDislikes.service';
+import { PutUpdateUserLikes } from '../../services/UpdateUserLikeDislike.service';
+import { BlockThisUser } from "../../services/BlockUser.service";
+import { VisitThisUser } from '../../services/VisitUser.service';
 import Moment from 'moment';
-import { PutUpdateUserUnlikes } from '../../../store/actions/UsersActions/UpdateUserUnlikes';
-import { reportThisUser } from '../../../store/actions/UsersActions/ReportUserAction';
+import { PutUpdateUserUnlikes } from '../../services/UpdateUserUnlikes.service';
+import { reportThisUser } from '../../services/ReportUser.service';
+
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
+import './profileDetails.css';
+
 const customNotification = require('../utils/notification');
 
 class ProfileDetails extends React.Component {
@@ -60,7 +60,12 @@ class ProfileDetails extends React.Component {
     async handleBlock(e) {
         e.preventDefault();
         let userId = this.props.match.params.id;
-        await this.props.onBlockThisUser(userId);
+        let dataRes = await BlockThisUser(userId);
+
+
+        if (dataRes !== undefined && dataRes.code === 200)
+            customNotification.fireNotification("success", dataRes.msg)
+
         let userAction = localStorage.getItem("userId");
 
         setTimeout(() => {
@@ -80,7 +85,11 @@ class ProfileDetails extends React.Component {
     async handleReport(e) {
         e.preventDefault();
         let userId = this.props.match.params.id;
-        await this.props.onreportThisUser(userId);
+        let dataIn = await reportThisUser(userId);
+
+        if (dataIn !== undefined && dataIn.code === 200)
+            customNotification.fireNotification("success", dataIn.msg)
+
         let userAction = localStorage.getItem("userId");
 
         setTimeout(() => {
@@ -102,9 +111,14 @@ class ProfileDetails extends React.Component {
         let userId = this.props.match.params.id;
         let userAction = localStorage.getItem("userId");
 
-        await this.props.onPutUpdateUserLikes(userId, state);
+        await PutUpdateUserLikes(userId, state);
         setTimeout(async () => {
-            await this.props.onGetuserLikes(userId);
+            let usLikes = await getUserLikes(userId);
+            if (usLikes.data !== undefined)
+            this.setState({
+                likes: usLikes.data.likes,
+                dislikes: usLikes.data.dislikes
+            })
         }, 10)
 
         setTimeout(() => {
@@ -133,7 +147,7 @@ class ProfileDetails extends React.Component {
                 }
 
             if (this.state.countLikes > this.state.likes) {
-                this.props.onPutUpdateUserUnlikes(userId);
+                PutUpdateUserUnlikes(userId);
                 if (state === 0) {
                     data.msg = " unliked your profile";
                     data.title = "unlike";
@@ -200,30 +214,25 @@ class ProfileDetails extends React.Component {
         })
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.getUserLikes.data !== undefined)
-            this.setState({
-                likes: nextProps.getUserLikes.data.likes,
-                dislikes: nextProps.getUserLikes.data.dislikes
-            })
-        if (nextProps.getProfileInfo.data !== undefined)
-            this.initProfileInformation(nextProps.getProfileInfo.data);
-        if (nextProps.getUserInterests !== undefined && nextProps.getUserInterests.code === 200)
-            this.initInterestArray(nextProps.getUserInterests.data)
-        if (nextProps.blockUser !== undefined && nextProps.blockUser.code === 200)
-            customNotification.fireNotification("success", nextProps.blockUser.msg)
-        if (nextProps.reportUser !== undefined && nextProps.reportUser.code === 200)
-            customNotification.fireNotification("success", nextProps.reportUser.msg)
-    }
-
-
     async UNSAFE_componentWillMount() {
         let userId = this.props.match.params.id;
-        await this.props.onGetUserInfo(userId);
-        await this.props.onGetUserIntrests(userId);
-        await this.props.onGetuserLikes(userId);
-        await this.props.onVisitThisUser(userId);
+        let usInfo = await GetUserInfo(userId);
+        let usInterest = await GetUserIntrests(userId);
+        let usLikes = await getUserLikes(userId);
+        let usVivsit = await VisitThisUser(userId);
         let userAction = localStorage.getItem("userId");
+
+        if (usLikes.data !== undefined)
+            this.setState({
+                likes: usLikes.data.likes,
+                dislikes: usLikes.data.dislikes
+            })
+
+        if (usInfo.data !== undefined)
+            this.initProfileInformation(usInfo.data);
+
+        if (usInterest !== undefined && usInterest.code === 200)
+            this.initInterestArray(usInterest.data)
 
         setTimeout(() => {
             let likes = this.state.likes;
@@ -262,20 +271,10 @@ class ProfileDetails extends React.Component {
 
         return (
             <div>
-                <Header />
+                <Navbar />
                 <ToastContainer />
                 <div className="content-wrapper" >
-                    <section className="content-header" >
-                        <br></br>
-                        <ol className="breadcrumb">
-                            <li>
-                                <a href="/">
-                                    <i className="fa fa-dashboard"></i> Home
-                </a>
-                            </li>
-                        </ol>
-                    </section>
-
+                    
                     <section className="content">
                         <div className="row">
                             <div className="col-md-12">
@@ -424,42 +423,9 @@ class ProfileDetails extends React.Component {
                         </div>
                     </section>
                 </div>
-
-                <Sidebar />
-                <Footer />
             </div>
         );
     }
 }
 
-const state = (state, ownProps = {}) => {
-    return {
-        reportUser: state.reportUser.reportUser,
-        blockUser: state.blockUser.blockUser,
-        getUserLikes: state.getUserLikes.getUserLikes,
-        location: state.location,
-        getUserInterests: state.getUserInterests.getUserInterests,
-        getProfileInfo: state.getProfileInfo.getProfileInfo,
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        navigateTo: (location) => {
-            dispatch(push(location));
-        },
-        onGetUserInfo: (userId) => dispatch(GetUserInfo(userId)),
-        onGetUserIntrests: (userId) => dispatch(GetUserIntrests(userId)),
-        onGetuserLikes: (userId) => dispatch(GetuserLikes(userId)),
-        onPutUpdateUserLikes: (userId, cheker) => dispatch(PutUpdateUserLikes(userId, cheker)),
-        onBlockThisUser: (blocked_userId) => dispatch(BlockThisUser(blocked_userId)),
-        onVisitThisUser: (visited_userId) => dispatch(VisitThisUser(visited_userId)),
-        onreportThisUser: (reported_userId) => dispatch(reportThisUser(reported_userId)),
-        onPutUpdateUserUnlikes: (userId) => dispatch(PutUpdateUserUnlikes(userId))
-    }
-};
-
-export default connect(
-    state,
-    mapDispatchToProps
-)(ProfileDetails);
+export default ProfileDetails;

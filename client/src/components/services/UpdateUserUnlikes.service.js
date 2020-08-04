@@ -1,10 +1,15 @@
 import axios from "axios/index";
 
-function getUserLikes(userId)  {
+export function PutUpdateUserUnlikes(unliked_userId) {
+
     return new Promise(async (resolve, reject) => {
         const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("userId");
 
-        axios.get(process.env.REACT_APP_API_URL + "/users/likes/" + userId, {
+        axios.post(process.env.REACT_APP_API_URL + "/users/unlikes", {
+            unliker_user_id: userId,
+            has_been_unliked_user_id: unliked_userId
+        }, {
             headers: {
                 "Authorization": `Bearer ` + token
             }
@@ -13,9 +18,8 @@ function getUserLikes(userId)  {
                 resolve(results.data)
             })
             .catch(err => {
-                resolve("");
+                resolve(false);
             });
+
     })
 }
-
-export default getUserLikes;

@@ -1,20 +1,25 @@
 const userService = require('../services/userService/index')
 
 loginUser = (req, res, next) => {
-    userService.loginUser.loginUserAuth(req.body, res);
+    userService.loginUser.loginUserAuth(req.body.credentials, res);
 };
 
 registerUser = (req, res, next) => {
     userService.registerUser.registerNewUser(req, res);
 }
 
+activateUserAccount = (req, res, next) => {
+    let activationToken = req.params.token;
+    userService.activateAccount.activateAccount(activationToken, res)
+}
+
 restUserPassword = (req, res, next) => {
     userService.resetPassword.resetPassword(req.body.emailOrUsername, res)
 }
 
-activateUserAccount = (req, res, next) => {
-    let activationToken = req.params.token;
-    userService.activateAccount.activateAccount(activationToken, res)
+editPrfile = (req, res, next) => {
+    let userId = req.params.userId;
+    userService.updateUserProfile.updateUserProfile(req.body, req.files, userId, res);
 }
 
 getProfileInfo = (req, res, next) => {
@@ -24,11 +29,16 @@ getProfileInfo = (req, res, next) => {
     userService.getUserInfoService.getUserInfo(sourceUserId, userId, res);
 }
 
-
 getCurrentProfileInfo = (req, res, next) => {
     let userId = req.params.userId;
 
     userService.getUserInfoService.getCurrentUserInfo(userId, res);
+}
+
+
+getUserInterests = (req, res, next) => {
+    let userId = req.params.userId;
+    userService.getUserInterestService.getUserInterest(userId, res);
 }
 
 fetchAllUsersPublicData = (req, res, next) => {
@@ -36,10 +46,9 @@ fetchAllUsersPublicData = (req, res, next) => {
     userService.fetchAllUsersPublicDataService.fetchAllUsersPublicInfo(userId, res);
 }
 
-
-getUserInterests = (req, res, next) => {
+onUserLogout = (req, res, next) => {
     let userId = req.params.userId;
-    userService.getUserInterestService.getUserInterest(userId, res);
+    userService.updateUSerLogoutService.updateUSerLogout(userId, res);
 }
 
 getUserLikesDislikes = (req, res, next) => {
@@ -52,15 +61,64 @@ updateUserLikesDislikes = (req, res, next) => {
     userService.updateUserLikesDislikesService.putUserLikesDislikes(checker, req.body, res);
 }
 
+saveUserUnlikesController = (req, res, next) => {
+    userService.updateUserLikesDislikesService.putUserUnlikes(req.body, res);
+}
+
+blockUserControl = (req, res, next) => {
+    userService.blockUserService.blockThisUser(req.body, res);
+}
+
+visitUserControl = (req, res, next) => {
+    userService.visitUserService.putVisitUser(req.body, res);
+}
+
+userNotifsController = (req, res, next) => {
+    let userId = req.params.userId;
+
+    userService.getUserNotifsService.getUserNotifs(userId, res);
+}
+
+reportUserController = (req, res, next) => {
+    userService.reportThisUserService.putReportUser(req.body, res);
+}
+
+userChatController = (req, res, next) => {
+    let userId = req.params.userId;
+
+    userService.userChatService.userChatContact(userId, res);
+}
+
+saveUserChatController = (req, res, next) => {
+    userService.saveUserChatService.saveUserChatContact(req.body, res);
+}
+
+getUserChatMsgController = (req, res, next) => {
+    let userId = req.params.userId;
+    let desUserId = req.params.desUserId;
+
+    userService.getUserChatMsgsService.userChatMsgs(desUserId, userId, res);
+}
+
 module.exports = {
-    restUserPassword,
-    getUserInterests,
-    getUserLikesDislikes,
+    getUserChatMsgController,
+    saveUserChatController,
+    userChatController,
+    reportUserController,
+    userNotifsController,
+    visitUserControl,
+    blockUserControl,
     updateUserLikesDislikes,
-    activateUserAccount,
-    getCurrentProfileInfo,
-    loginUser,
+    getUserLikesDislikes,
+    onUserLogout,
     fetchAllUsersPublicData,
+    getUserInterests,
+    editPrfile,
     getProfileInfo,
-    registerUser
+    getCurrentProfileInfo,
+    restUserPassword,
+    saveUserUnlikesController,
+    activateUserAccount,
+    registerUser,
+    loginUser
 }

@@ -1,0 +1,39 @@
+
+.content-wrapper { 
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 20px;
+}
+
+.box-profile {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.box-profile > img {
+    width: 200px;
+    align-self: center;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.btn {
+    padding: 10px 10px;
+    background-color: beige;
+    margin-left: 10px;
+} 
+
+.btn-primary {
+    background-color: rgb(149, 139, 158);
+}
+
+.btn-warning { 
+    background-color: rgb(236, 236, 125);
+}
+
+.btn-danger {
+    background-color: rgb(170, 154, 154);
+}

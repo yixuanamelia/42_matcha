@@ -1,10 +1,10 @@
 import axios from "axios/index";
 
-function getUserLikes(userId)  {
+export function GetCurrentUserInfo(userId) {
     return new Promise(async (resolve, reject) => {
         const token = localStorage.getItem("token");
 
-        axios.get(process.env.REACT_APP_API_URL + "/users/likes/" + userId, {
+        axios.get(process.env.REACT_APP_API_URL + "/users/current/" + userId, {
             headers: {
                 "Authorization": `Bearer ` + token
             }
@@ -13,9 +13,7 @@ function getUserLikes(userId)  {
                 resolve(results.data)
             })
             .catch(err => {
-                resolve("");
+                resolve(false);
             });
     })
 }
-
-export default getUserLikes;

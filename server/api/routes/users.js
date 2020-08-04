@@ -75,4 +75,10 @@ router.get('/:userId/user/:sourceUserId', authCkeck, upload.any(), userControlle
  */
 router.get('/current/:userId', authCkeck, userController.getCurrentProfileInfo);
 
+/*
+ * API [GET] for roure /users/publicData/:userId
+ */
+router.get('/publicData/:userId', userController.fetchAllUsersPublicData);
+
+
 module.exports = router;

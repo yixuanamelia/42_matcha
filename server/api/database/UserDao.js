@@ -143,4 +143,54 @@ module.exports = class userDao {
         })
     }
 
+    async fetchAllUsers(userId) {
+        return new Promise(async (resolve, reject) => {
+            let query = "SELECT user.id, pseudo, lastname, firstname, age, bio, gender, sexual_orientation, psycho_type, localisation, fame, user.updatedAt, user.online, GROUP_CONCAT(path) as image_paths, GROUP_CONCAT(state) as image_states, tag_array_string \
+            FROM user \
+                LEFT JOIN picture \
+                ON user.id = picture.user_id  \
+                LEFT JOIN (\
+                    SELECT user_has_interests.user_id AS user_id, GROUP_CONCAT(interests.name) AS tag_array_string\
+                    FROM   user_has_interests \
+                    JOIN   interests  ON interests.id = user_has_interests.interests_id \
+                    GROUP  BY user_has_interests.user_id \
+                ) tmp_tag \
+                ON user.id = tmp_tag.user_id\
+            WHERE (profile_completion > ?) \
+            AND (NOT EXISTS (select 1 from block where block.blocked_user_id = user.id AND block.blocker_user_id = ?))\
+            AND (user.id != ?)\
+            GROUP BY user.id";
+            let preparedQuery = await prepareQuery.prepareQuery(query, [10, userId, userId])
+            let response = await this.execQuery(preparedQuery);
+            response.forEach(user => {
+                let image_array = user.image_paths === null ? [] : user.image_paths.split(',');
+                let states = user.image_states === null ? [] : user.image_states.split(',');
+                let tmp1 = {};
+                let tmp2 = [];
+                user.images = tmp1;
+                user.images.paths = tmp2;
+                for (var i = 0; i < image_array.length; i++) {
+                    if (parseInt(states[i]) === 1) {
+                        let tmp = image_array[i];
+                        user.images.profile_pic = tmp;
+                    } else {
+                        let tmp3 = image_array[i]
+                        user.images.paths.push(tmp3);
+                    }
+                }
+                if (user.tag_array_string !== null) {
+                    let tmp5 = user.tag_array_string.split(',');
+                    user.tags = tmp5;
+                } else {
+                    user.tags = [];
+                }
+                delete user.image_paths;
+                delete user.image_states;
+                delete user.tag_array_string;
+            });
+
+            resolve(response);
+        })
+    }
+
 }

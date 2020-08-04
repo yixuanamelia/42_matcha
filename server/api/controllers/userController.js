@@ -31,11 +31,18 @@ getCurrentProfileInfo = (req, res, next) => {
     userService.getUserInfoService.getCurrentUserInfo(userId, res);
 }
 
+fetchAllUsersPublicData = (req, res, next) => {
+    let userId = req.params.userId;
+    userService.fetchAllUsersPublicDataService.fetchAllUsersPublicInfo(userId, res);
+}
+
+
 module.exports = {
     restUserPassword,
     activateUserAccount,
     getCurrentProfileInfo,
     loginUser,
+    fetchAllUsersPublicData,
     getProfileInfo,
     registerUser
 }

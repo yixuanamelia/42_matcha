@@ -12,6 +12,7 @@ import Signup from './components/pages/Signup/Signup';
 import ForgotPass from './components/pages/ForgotPass/ForgotPass';
 import Main from './components/pages/Main/Mainpage';
 import Logout from './components/pages/Logout/Logout';
+import EditProfile from './components/pages/Profile/EditProfile';
 
 // Third party libraries
 import decode from 'jwt-decode';
@@ -57,9 +58,11 @@ function App() {
         <Switch>
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/forgotPass" component={ForgotPass} />
-          <AuthRoute exact path="/" component={Main} />
+          <Route exact path="/" component={Main} />
           <AuthRoute exact path="/logout" component={Logout} />
+
         </Switch>
       </Router>
     </div>

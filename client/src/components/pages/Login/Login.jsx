@@ -26,7 +26,6 @@ class Login extends React.Component {
     })
   }
 
-
   async handleSubmit(e) {
     e.preventDefault();
     let data = {
@@ -93,12 +92,12 @@ class Login extends React.Component {
                   <div className="flex-m w-full p-b-33">
 
                     <div className="contact100-form-checkbox">
-                        <span className="txt1">
-                          <a href="/forgotPass" className="txt2 hov1">
-                            Forgot Password?
+                      <span className="txt1">
+                        <a href="/forgotPass" className="txt2 hov1">
+                          Forgot Password?
 									</a>
-                        </span>
-                 
+                      </span>
+
                     </div>
 
                   </div>

@@ -13,12 +13,15 @@ import ForgotPass from './components/pages/ForgotPass/ForgotPass';
 import Home from './components/pages/Main/Home';
 import Logout from './components/pages/Logout/Logout';
 import ProfileDetail from './components/pages/ProfileDetail/ProfileDetail';
+import Notifications from './components/pages/Notifications/NotificationsHome.js';
 
 // Third party libraries
 import decode from 'jwt-decode';
 import 'react-toastify/dist/ReactToastify.css';
+import 'rc-slider/assets/index.css';
 
 require('dotenv').config();
+
 
 function App() {
   const checkAuth = () => {
@@ -60,6 +63,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/forgotPass" component={ForgotPass} />
           <AuthRoute exact path="/" component={Home} />
+          <AuthRoute exact path="/notifications" component={Notifications} />
           <AuthRoute exact path="/profiledetail/:id" component={ProfileDetail} />
           <AuthRoute exact path="/logout" component={Logout} />
         </Switch>

@@ -1,5 +1,5 @@
 const UserDao = require('../database/UserDao');
-// const BlockDao = require("../database/BlockDao");
+const BlockDao = require("../database/BlockDao");
 
 exports.connectWebSocket = (io) => {
     let notifs = {};
@@ -16,7 +16,7 @@ exports.connectWebSocket = (io) => {
 
         socket.on('likeUser', async function (data) {
             let userFullname = await user.getUserFullname(data.likerId);
-            // let block = new BlockDao(data.likedId)
+            let block = new BlockDao(data.likedId)
             data.fullname = userFullname;
 
             if (await block.hasUserNotBeenBlocked(data.likerId, data.likedId)) {

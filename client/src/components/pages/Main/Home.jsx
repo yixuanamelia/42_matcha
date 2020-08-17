@@ -23,11 +23,11 @@ class Home extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.filterUsers = this.filterUsers.bind(this);
+        this.updateSearch = this.updateSearch.bind(this);
     }
 
     async UNSAFE_componentWillMount() {
         let userData = await fetchAllUsersPublicData([]);
-        console.log("userData :", userData);
         this.initUsers(userData);
 
         const userId = localStorage.getItem("userId");
@@ -36,7 +36,6 @@ class Home extends React.Component {
     }
 
     onChange = async (e) => {
-        console.log(e.target.value);
         if (e.target.name !== 'sortBy') {
             e.preventDefault();
         }
@@ -54,6 +53,14 @@ class Home extends React.Component {
         this.setState({
             initialUsers: users,
             userBuffer: users
+        });
+    }
+
+    updateSearch(e, data) {
+        e.preventDefault();
+        this.setState({
+            initialUsers: data,
+            userBuffer: data
         });
     }
 
@@ -115,7 +122,7 @@ class Home extends React.Component {
 
                 <section className="content">
                     <br />
-                    <SearchBar />
+                    <SearchBar initUsers={(e) => this.updateSearch(e, [])} />
                     <div style={{ padding: '2rem' }}>
                         <div style={{ backgroundColor: 'grey', height: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> <h4>SORT BY</h4></div>
                         <div style={{ backgroundColor: 'grey', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

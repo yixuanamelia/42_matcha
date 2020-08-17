@@ -1,7 +1,7 @@
 const userService = require('../services/userService/index')
 
 loginUser = (req, res, next) => {
-    userService.loginUser.loginUserAuth(req.body.credentials, res);
+    userService.loginUser.loginUserAuth(req.body, res);
 };
 
 registerUser = (req, res, next) => {

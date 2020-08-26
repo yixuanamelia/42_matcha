@@ -1,0 +1,160 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main styling */
+
+html,body {
+  font-family: 'Roboto', sans-serif;
+  font-family: 'PT Sans', sans-serif;
+  line-height: 1.em;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+}
+
+
+h1, h2, h3 {
+  padding-bottom: 5px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+/* Utility classes */
+
+
+.text-primary{
+  color: rgb(99, 211, 99);
+}
+
+.lead {
+  font-size:20px;
+}
+
+.btn {
+  font-size:15px;
+  color:whitesmoke;
+  background:#333;
+  padding:10px;
+  border:none;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background-color:rgb(99, 211, 99);
+  color:darkslategrey;
+}
+
+.btn-light {
+  background:whitesmoke;
+  color:darkslategrey;
+}
+
+.bg-dark {
+  background:#333;
+  color:whitesmoke;
+}
+
+.bg-light{
+  background:whitesmoke;
+  color:#333;
+}
+
+.bg-primary{
+  color:#333;
+  background:rgb(99, 211, 99);
+}
+
+.clr {
+  clear:both;
+}
+
+.l-heading {
+  font-size: 50px;
+}
+
+/* padding */
+.py-1 {padding: 10px 0;}
+.py-2 {padding: 20px 0;}
+.py-3 {padding: 30px 0;}
+
+/* Contact form */
+#contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+#contact-form .label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#contact-form input, 
+#contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px #dddddd solid;
+  border-radius: 5px;
+}
+
+#contact-form textarea {
+  height:200px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+  outline: none;
+  border-color: rgb(99, 211, 99);
+}
+
+
+
+/* Footer */
+#main-footer{
+  text-align: center;
+  background:#333;
+  color:whitesmoke;
+  padding:10px;
+}
+
+
+select{
+  width: 100%;
+  padding: 10px;
+  border: 1px #dddddd solid;
+  border-radius: 5px;
+}
+
+
+.profile-main{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+/*profile item */
+.profile-img {
+  flex: 1;
+}
+
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.container {
+  margin: auto;
+  max-width: 1100px;
+  overflow: auto;
+  padding: 0 20px;
+}

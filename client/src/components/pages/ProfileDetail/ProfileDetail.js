@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from '../common/Navbar/Navbar';
-
 import { GetUserInfo } from '../../services/FetchUserInfo.service';
 import { GetUserIntrests } from '../Main/interest.service';
 import getUserLikes from '../../services/GetUserlikesDislikes.service';
@@ -115,10 +114,10 @@ class ProfileDetails extends React.Component {
         setTimeout(async () => {
             let usLikes = await getUserLikes(userId);
             if (usLikes.data !== undefined)
-            this.setState({
-                likes: usLikes.data.likes,
-                dislikes: usLikes.data.dislikes
-            })
+                this.setState({
+                    likes: usLikes.data.likes,
+                    dislikes: usLikes.data.dislikes
+                })
         }, 10)
 
         setTimeout(() => {
@@ -274,7 +273,7 @@ class ProfileDetails extends React.Component {
                 <Navbar />
                 <ToastContainer />
                 <div className="content-wrapper" >
-                    
+
                     <section className="content">
                         <div className="row">
                             <div className="col-md-12">

@@ -117,36 +117,37 @@ class Home extends React.Component {
         let filteredUsers = this.state.userBuffer;
 
         return (
-            <div className="content-wrapper">
+            <>
                 <Navbar />
-
-                <section className="content">
-                    <br />
-                    <SearchBar initUsers={(e) => this.updateSearch(e, [])} />
-                    <div style={{ padding: '2rem' }}>
-                        <div style={{ backgroundColor: 'grey', height: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> <h4>SORT BY</h4></div>
-                        <div style={{ backgroundColor: 'grey', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={somemargin}>
-                                <div>Age</div>
-                                <input type="radio" name="sortBy" value="age" checked={this.state.sortBy === 'age'} onChange={this.onChange} />
-                            </div>
-                            <div style={somemargin}>
-                                <div>Distance</div>
-                                <input type="radio" name="sortBy" value="location" checked={this.state.sortBy === 'location'} onChange={this.onChange} />
-                            </div>
-                            <div style={somemargin}>
-                                <div>Tags</div>
-                                <input type="radio" name="sortBy" value="tags" checked={this.state.sortBy === 'tags'} onChange={this.onChange} />
-                            </div>
-                            <div style={somemargin}>
-                                <div>Fame</div>
-                                <input type="radio" name="sortBy" value="fame" checked={this.state.sortBy === 'fame'} onChange={this.onChange} />
+                <div className="content-wrapper">
+                    <section className="content">
+                        <br />
+                        <SearchBar initUsers={(e) => this.updateSearch(e, [])} />
+                        <div style={{ padding: '2rem' }}>
+                            <div style={{ backgroundColor: 'grey', height: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> <h4>SORT BY</h4></div>
+                            <div style={{ backgroundColor: 'grey', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <div style={somemargin}>
+                                    <div>Age</div>
+                                    <input type="radio" name="sortBy" value="age" checked={this.state.sortBy === 'age'} onChange={this.onChange} />
+                                </div>
+                                <div style={somemargin}>
+                                    <div>Distance</div>
+                                    <input type="radio" name="sortBy" value="location" checked={this.state.sortBy === 'location'} onChange={this.onChange} />
+                                </div>
+                                <div style={somemargin}>
+                                    <div>Tags</div>
+                                    <input type="radio" name="sortBy" value="tags" checked={this.state.sortBy === 'tags'} onChange={this.onChange} />
+                                </div>
+                                <div style={somemargin}>
+                                    <div>Fame</div>
+                                    <input type="radio" name="sortBy" value="fame" checked={this.state.sortBy === 'fame'} onChange={this.onChange} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <ResultUser users={filteredUsers} />
-                </section>
-            </div>
+                        <ResultUser users={filteredUsers} />
+                    </section>
+                </div>
+            </>
         );
     }
 }

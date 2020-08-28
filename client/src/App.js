@@ -15,6 +15,7 @@ import Logout from './components/pages/Logout/Logout';
 import EditProfile from './components/pages/Profile/EditProfile';
 import ProfileDetail from './components/pages/ProfileDetail/ProfileDetail';
 import Notifications from './components/pages/Notifications/NotificationsHome.js';
+import Chat from './components/pages/Chat/chat';
 
 // Third party libraries
 import decode from 'jwt-decode';
@@ -65,6 +66,7 @@ function App() {
           <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/forgotPass" component={ForgotPass} />
           <AuthRoute exact path="/" component={Home} />
+          <AuthRoute exact path="/chatroom" component={Chat} />
           <AuthRoute exact path="/notifications" component={Notifications} />
           <AuthRoute exact path="/profiledetail/:id" component={ProfileDetail} />
           <AuthRoute exact path="/logout" component={Logout} />

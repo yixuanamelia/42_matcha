@@ -306,6 +306,10 @@ module.exports = class userDao {
 
     async fetchAllUsers(userId) {
         return new Promise(async (resolve, reject) => {
+
+            /**
+             * PROBLEM WITH THIS QUERY : image_paths / image_states / tag_array_string needs to be formatted 
+             */
             let query = "SELECT user.id, pseudo, lastname, firstname, age, bio, gender, sexual_orientation, psycho_type, localisation, fame, user.updatedAt, user.online, GROUP_CONCAT(path) as image_paths, GROUP_CONCAT(state) as image_states, tag_array_string \
             FROM user \
                 LEFT JOIN picture \
@@ -323,6 +327,7 @@ module.exports = class userDao {
             GROUP BY user.id";
             let preparedQuery = await prepareQuery.prepareQuery(query, [10, userId, userId])
             let response = await this.execQuery(preparedQuery);
+            //FORMATTAGE needded to instantiate a lot of useless tmp variable else the promise crached
             response.forEach(user => {
                 let image_array = user.image_paths === null ? [] : user.image_paths.split(',');
                 let states = user.image_states === null ? [] : user.image_states.split(',');
@@ -349,6 +354,20 @@ module.exports = class userDao {
                 delete user.image_states;
                 delete user.tag_array_string;
             });
+
+            /**
+            * PROBLEM WITH THIS QUERY : it doesn't include tags and picture is limited to profile_picture
+            */
+            // let query = "SELECT user.id, pseudo, lastname, firstname, age, bio, gender, sexual_orientation, psycho_type, localisation, fame, path as profile_picture \
+            // FROM user \
+            //     INNER JOIN picture \
+            //     ON user.id = picture.user_id  \
+            // WHERE (profile_completion > ?) \
+            // AND (user.id != (select blocked_user from block where block.user_id = ?)) \
+            // AND state = ?";
+            // let preparedQuery = await prepareQuery.prepareQuery(query, [7, userId, 1])
+            // let response = await this.execQuery(preparedQuery);
+
             resolve(response);
         })
     }

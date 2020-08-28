@@ -19,6 +19,7 @@ restUserPassword = (req, res, next) => {
 
 editPrfile = (req, res, next) => {
     let userId = req.params.userId;
+    console.log("req.files :", req.files);
     userService.updateUserProfile.updateUserProfile(req.body, req.files, userId, res);
 }
 

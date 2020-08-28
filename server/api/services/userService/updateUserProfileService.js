@@ -15,7 +15,7 @@ async function updateUserProfile(data, files, userId, res) {
         else
             tags.updateTags(data.tags, 'str')
         // Update user pictures
-        if (files.length > 0)
+        if (files && files.length > 0)
             await pictures.updatePictures(files, data.profilePhoto)
         // Update user information
         if (await user.updateUserProfile(data, userId) === true) {

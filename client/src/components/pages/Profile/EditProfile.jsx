@@ -258,17 +258,15 @@ class EditProfile extends React.Component {
 
 
               <div className="form-group">
-                <label
-                  className="col-sm-2 control-label"
-                >
+                <label className="col-sm-2 control-label">
                   Upload a photoes
-                          </label>
+                </label>
 
 
                 <div className="input-group image-preview col-md-8 files">
 
                   <input type="file" name="multiPhotos" onChange={this.handlePhotoesChange} multiple accept="image/png, image/jpeg, image/gif" />
-                  <p className="help-block col-md-7">Only 4 photoes and format JPEG/PNG allowed.</p>
+                  <p className="help-block col-md-7">Only 5 photoes and format JPEG/PNG allowed.</p>
                 </div>
               </div>
             </div>
@@ -439,16 +437,16 @@ class EditProfile extends React.Component {
               <div className="form-group">
                 <label
                   className="col-sm-2 control-label"
-                >interests</label>
+                >Interests</label>
                 {this.state.showAddHobi === false ?
                   <button onClick={(e) => { this.handleShowAddHoby(e) }}
-                    className="btn btn-info">
-                    <i className="fa fa-plus"></i>
+                    className="btn btn-light">
+                    Add New<i className="fa fa-plus"></i>
                   </button>
                   : <button onClick={(e) => { this.addHobytag(e) }}
-                    className="btn btn-success">
-                    <i className="glyphicon glyphicon-ok"></i>
-                  </button>}
+                    className="btn btn-light">
+
+                    Add</button>}
                 <div className="col-sm-9" style={{ 'zIndex': '222' }}>
 
                   <Select
@@ -495,7 +493,7 @@ class EditProfile extends React.Component {
               </div>
             </div>
 
-            <button onClick={(e) => {this.handlFormSubmitAction(e)}} class="btn">Update</button>
+            <button onClick={(e) => { this.handlFormSubmitAction(e) }} class="btn">Update</button>
           </section>
 
         </div>

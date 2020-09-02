@@ -39,13 +39,15 @@ p {
 }
 
 .btn {
-  font-size:15px;
+  font-size:13.5px;
   color:whitesmoke;
   background:#333;
   padding:10px;
   border:none;
   border-radius:10px;
   cursor: pointer;
+
+
 }
 
 .btn:hover{

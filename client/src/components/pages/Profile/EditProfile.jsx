@@ -335,11 +335,9 @@ class EditProfile extends React.Component {
                   id="Password"
                   name="Password"
                   onChange={this.handleChange}
-                  placeholder="Enter your Password"
+                  placeholder="Leave the password empty if you dont want to change it"
                 />
-                <p style={{ 'fontSize': '11px' }} className="help-block col-md-7 col-md-offse">
-                  Leave the password empty if you dont want to change it
-                              </p>
+
               </div>
 
               <div class="form-group">
@@ -398,7 +396,7 @@ class EditProfile extends React.Component {
                 <label
                   className="col-sm-2 control-label"
                 >
-                  ProfileCompletion
+                  Profile Completion
                           </label>
 
                 <div className="col-sm-10">
@@ -441,7 +439,7 @@ class EditProfile extends React.Component {
                 {this.state.showAddHobi === false ?
                   <button onClick={(e) => { this.handleShowAddHoby(e) }}
                     className="btn btn-light">
-                    Add New<i className="fa fa-plus"></i>
+                    Add New
                   </button>
                   : <button onClick={(e) => { this.addHobytag(e) }}
                     className="btn btn-light">

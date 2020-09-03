@@ -49,6 +49,8 @@ export class NotificationsHome extends Component {
                 <Navbar />
 
                 <div className="content-wrapper">
+                    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
                     <section className="content">
                         <section className="content">
                             <div className="row">

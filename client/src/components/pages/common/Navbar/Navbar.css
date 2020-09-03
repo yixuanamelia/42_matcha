@@ -2,7 +2,8 @@
 .header {
   overflow: hidden;
   background-color: #e8519e;
-  padding: 20px 10px;
+  padding: 0px 0px;
+  padding-top: 10px;
   font-family: 'Yellowtail', cursive;
 }
 
@@ -82,4 +83,46 @@
   bottom: 7px;
   right: 0.3px;
   font-family: sans-serif;
+}
+
+.notiflist {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 10px;
+  background-color: silver;
+  padding: 20px 20px;
+  z-index: 1111;
+  height: 300px;
+  overflow: auto;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.recpoint {
+  position: absolute;
+  right: 125px;
+  top: 55px;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid silver;
+}
+
+.singlenotif {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 5px 5px;
+}
+
+.singlenotif > span {
+  font-size: 10px;
+  margin-top: 4px;
+  opacity: 0.5;
+  align-self: flex-end;  
 }

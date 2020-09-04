@@ -65,8 +65,8 @@
 }
 
 .notifnum {
-  background-color: red;
-  border-radius: 50px;
+  background-color: rgb(255, 0, 85);
+  border-radius: 30px;
   /* padding: 0px 10px; */
   position: relative;
   width: 15px;
@@ -85,18 +85,47 @@
   font-family: sans-serif;
 }
 
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Kumbh+Sans:wght@300&display=swap');
 .notiflist {
+  
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 10px;
-  background-color: silver;
+  background-color:#eccee5;
   padding: 20px 20px;
+  font-size:13px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Kumbh Sans', sans-serif;
   z-index: 1111;
   height: 300px;
   overflow: auto;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+
+
+/*pop-up header*/
+.head  {
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Kumbh Sans', sans-serif;
+}
+
+.head > span {
+  padding-left:5px;
+  padding-right: 90px;
+}
+
+.head a {
+ padding-right: 5px;
+ padding-bottom: 30px;
+  font-size:13px;
+  color:black;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 
 .recpoint {
@@ -108,8 +137,10 @@
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid silver;
+  border-bottom: 20px solid #f79fcc;
 }
+
+
 
 .singlenotif {
   display: flex;
@@ -117,12 +148,12 @@
   padding: 10px 10px;
   border: 1px solid white;
   border-radius: 10px;
-  margin: 5px 5px;
+  margin: 10px 5px;
 }
 
 .singlenotif > span {
   font-size: 10px;
-  margin-top: 4px;
+  margin-top: 6px;
   opacity: 0.5;
   align-self: flex-end;  
 }

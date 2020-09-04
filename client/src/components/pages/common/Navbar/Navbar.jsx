@@ -41,6 +41,10 @@ class Navbar extends React.Component {
 
         {this.state.popVisible === true ?
           <div class="notiflist">
+            <div class="head">
+              <span>Notifications(12)</span>
+              <a href="">Mark all as read</a>
+            </div>
             <div class="singlenotif">
               abn has liked your profile
                   <span>12 jan 2019 at 10:03 pm</span>
@@ -83,7 +87,8 @@ class Navbar extends React.Component {
             </div>
 
           </div>
-          : null}
+          : null
+        }
 
       </>
     );

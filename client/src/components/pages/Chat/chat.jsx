@@ -94,6 +94,7 @@ class Chat extends React.Component {
             this.setState({
                msgContent: ""
             })
+            
             let data = {
                id: parseInt(this.state.messagesInfo.source_userId) +
                   parseInt(this.state.messagesInfo.dest_userId),

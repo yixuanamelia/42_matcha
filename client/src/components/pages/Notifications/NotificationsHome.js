@@ -41,7 +41,7 @@ export class NotificationsHome extends Component {
         let room = localStorage.getItem("userId");
         this.state.socket.emit('initLikesList', room)
         this.state.socket.disconnect(true);
-    }
+    } 
 
     render() {
         return (

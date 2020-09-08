@@ -117,10 +117,10 @@ class Home extends React.Component {
         let filteredUsers = this.state.userBuffer;
 
         return (
-            <>
+            <div>
                 <Navbar />
-                <div className="content-wrapper">
-                    <section className="content">
+                <div className="">
+                    <section className="">
                         <br />
                         <SearchBar initUsers={(e) => this.updateSearch(e, [])} />
                         <div style={{ padding: '2rem' }}>
@@ -147,7 +147,7 @@ class Home extends React.Component {
                         <ResultUser users={filteredUsers} />
                     </section>
                 </div>
-            </>
+            </div>
         );
     }
 }

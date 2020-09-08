@@ -93,14 +93,16 @@ class Navbar extends React.Component {
               <a href="">Mark all as read</a>
             </div> */}
 
-            {notifs ? notifs.map(notif => {
+            {notifs && notifs.length > 0 ? notifs.map(notif => {
               return <div key={notif.id} class="singlenotif">
                 <a href={`/profiledetail/${notif.id}`}>
                   <b> {notif.fullname}</b> {notif.description}
                 </a>
                 <span>{Moment(notif.updatedAt).fromNow()}</span>
               </div>
-            }) : null}
+            }) : <div class="singlenotif">
+              No notifications
+          </div>}
           </div>
           : null
         }

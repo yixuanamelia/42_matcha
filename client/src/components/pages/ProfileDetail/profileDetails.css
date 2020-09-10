@@ -16,20 +16,19 @@
 
 
   .l-heading1{
-    padding-top:20px;
-    font-size: 30px;
+    padding-top:25px;
+    font-size: 35px;
     text-align:center;
   }
   .l-heading2 {
     font-size: 30px;
     text-align:center;
-
   }
 
 
 .content-wrapper { 
     display: flex;
-    flex-direction: row;
+    flex-direction: colo;
     align-content: center;
     margin-top: 20px;
 }
@@ -39,8 +38,10 @@
     display: flex;
     align-content: center;
     flex-direction: column;
-    margin-top: 20px;
-    margin-left:34px;
+    justify-self: flex-start;
+    margin-left:30px;
+    margin-right:30px;
+    padding: 0 30px; 
 }
 
 .profile-detail{
@@ -48,7 +49,7 @@
         flex-direction: column;
         max-width: 1100px;
         overflow: auto;
-        padding: 0 20px;    
+        padding: 0 30px;    
         margin-top:20px;   
 }
 .box-profile {
@@ -72,7 +73,9 @@
 
 .btn-danger {
     background-color: rgb(170, 154, 154);
-    margin-left:70px;
+    margin-left:40px;
+    margin-right:40px;
+    margin-top:8px;
 
 }
 
@@ -93,7 +96,7 @@ ul {
   li a {
     display: block;
     color: #f79fcc;
-    padding: 10px;
+    padding: 12px;
     text-decoration: none;
     font-size:20px;
     font-family: 'Yellowtail', cursive;
@@ -109,7 +112,7 @@ ul {
 
 .detail-list{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
 #contact-form .label {

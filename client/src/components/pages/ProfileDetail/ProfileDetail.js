@@ -275,17 +275,15 @@ class ProfileDetails extends React.Component {
                 <div className="content-wrapper" >
                     {/* item1 */}
                     <div className="user-pic">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt="" />
-
-
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" style={{ 'height': '250px', 'border-radius': '50%', 'border': '5px solid #FEDE00', 'margin-top': '30px' }} class="img-responsive" alt="" />
                         <div className="l-heading1">
                             {this.state.firstname}{" "}
                             {this.state.lastname}
                         </div>
-                        {/* <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
+                        {/* TODO:add online status green dot <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="10" cy="10" r="10" fill="green" />
                                 </svg>
-                            </div>*/}
+                            </div> */}
 
 
                         <ul className="list-group list-group-unbordered text-center">
@@ -305,7 +303,7 @@ class ProfileDetails extends React.Component {
 
                     {/* item2 */}
                     <div className="profile-detail">
-                        <nav class="navbar navbar-light bg-light" style={{ 'border-radius': '10px' }}>
+                        <nav class="navbar navbar-light bg-light" style={{ 'border-radius': '10px', 'margin-top': '20px' }}>
                             <ul className="l-heading2">
                                 <li><a ref="">Profile</a></li>
                                 <li><a ref="">Pictures</a></li>
@@ -313,7 +311,7 @@ class ProfileDetails extends React.Component {
                         </nav>
 
                         <div class="detail-list">
-                            <div style={{ 'margin-top': '5px' }} >  Pseudo : {this.state.psudonym}</div>
+                            <div style={{ 'margin-top': '15px' }} >  Pseudo : {this.state.psudonym}</div>
                         </div>
                         <div class="detail-list">
                             Age : {this.state.age}

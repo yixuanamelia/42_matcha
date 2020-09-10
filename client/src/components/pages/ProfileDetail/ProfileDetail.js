@@ -276,12 +276,17 @@ class ProfileDetails extends React.Component {
                     {/* item1 */}
                     <div className="user-pic">
                         <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt="" />
-                        <div class="l-heading1"> Yixuan Wang
+
+
+                        <div className="l-heading1">
+                            {this.state.firstname}{" "}
+                            {this.state.lastname}
+                        </div>
                         {/* <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="10" cy="10" r="10" fill="green" />
                                 </svg>
                             </div>*/}
-                        </div>
+
 
                         <ul className="list-group list-group-unbordered text-center">
                             <li className="list-group-item">
@@ -366,10 +371,6 @@ class ProfileDetails extends React.Component {
                                                     : ""}
 
 
-                                                <h4 className="profile-username text-center">
-                                                    {this.state.firstname}{" "}
-                                                    {this.state.lastname}
-                                                </h4>
 
 
                                                 <h5 style={{ 'fontSize': '12px' }} className="text-muted text-center">

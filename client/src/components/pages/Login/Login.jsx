@@ -75,14 +75,14 @@ class Login extends React.Component {
                 Log in
 					    </span>
               <div className="wrap-input100 validate-input" data-validate="Username is required">
-                <span className="label-input100">Email</span>
-                <input className="input100" type="text" name="email" onChange={(event) => this.handlChange(event)} placeholder="Input your username or email" />
+                <span className="label-input100" style={{ 'font-size': '22px' }}>Email</span>
+                <input className="input100" type="text" name="email" style={{ 'font-size': '15px' }} onChange={(event) => this.handlChange(event)} placeholder="Enter your username or email" />
                 <span className="focus-input100"></span>
               </div>
 
               <div className="wrap-input100 validate-input" data-validate="Password is required">
-                <span className="label-input100">Password</span>
-                <input className="input100" type="text" name="password" onChange={(event) => this.handlChange(event)} placeholder="*************" />
+                <span className="label-input100" style={{ 'font-size': '22px' }}>Password</span>
+                <input className="input100" type="password" name="password" style={{ 'font-size': '15px' }} onChange={(event) => this.handlChange(event)} placeholder="Enter your password" />
                 <span className="focus-input100"></span>
               </div>
 

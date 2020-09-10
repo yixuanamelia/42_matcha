@@ -440,6 +440,7 @@ class EditProfile extends React.Component {
                   <button onClick={(e) => { this.handleShowAddHoby(e) }}
                     className="btn btn-light">
                     Add New
+                    {/* TODO:fix api when adding a new interests, not working properly for now! */}
                   </button>
                   : <button onClick={(e) => { this.addHobytag(e) }}
                     className="btn btn-light">

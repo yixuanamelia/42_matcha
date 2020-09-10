@@ -101,7 +101,7 @@ class Navbar extends React.Component {
                 <span>{Moment(notif.updatedAt).fromNow()}</span>
               </div>
             }) : <div class="singlenotif">
-              No notifications
+                No notifications
           </div>}
           </div>
           : null

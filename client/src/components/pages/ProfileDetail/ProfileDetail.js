@@ -279,6 +279,7 @@ class ProfileDetails extends React.Component {
                         <div className="l-heading1">
                             {this.state.firstname}{" "}
                             {this.state.lastname}
+                            <div class="online-status"></div>
                         </div>
                         {/* TODO:add online status green dot <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="10" cy="10" r="10" fill="green" />
@@ -337,8 +338,16 @@ class ProfileDetails extends React.Component {
                             return <p key={i}>{hobi.label}</p>
                         }) : ""}
                         </div>
-                        <div class="detail-list">
-                            Bibliography : {this.state.Bibliography}
+                        <div class='detail-list'>
+                            About
+                             <div className='detail-list-about'>
+                                <textarea
+                                    value={this.state.Bibliography}
+                                    id="Bibliography" name="Bibliography"
+                                    rows="5" cols="42" onChange={this.handleChange}>
+                                </textarea>
+
+                            </div>
                         </div>
                     </div>
 

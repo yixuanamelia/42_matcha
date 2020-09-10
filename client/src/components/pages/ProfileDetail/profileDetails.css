@@ -21,8 +21,10 @@
     text-align:center;
   }
   .l-heading2 {
+    display:flex;
+    justify-content: space-evenly;
     font-size: 30px;
-    text-align:center;
+
   }
 
 
@@ -94,18 +96,17 @@ ul {
   }
   
   li a {
-    display: block;
+    display: flex;
     color: #f79fcc;
     padding: 12px;
     text-decoration: none;
-    font-size:20px;
+    font-size:22px;
     font-family: 'Yellowtail', cursive;
     border-radius: 10px;
   }
   
   li a:hover {
-    background-color: black;
-  
+    color: black;
   }
 
   /* contact form */
@@ -121,17 +122,16 @@ ul {
 }
   
 
+ 
   
-  #contact-form input, 
-  #contact-form textarea {
+
+
+  .detail-list-about  {
     width: 100%;
     padding: 10px;
+    margin-top:10px;
     border: 1px #dddddd solid;
     border-radius: 5px;
-  }
-  
-  #contact-form textarea {
-    height:200px;
   }
 
 .list-group-item{
@@ -143,4 +143,15 @@ ul {
 .online-status{
     margin-left:100px;
 
+}
+
+.online-status {
+  background-color: rgb(147, 236, 135);
+  border-radius: 30px;
+  /* padding: 0px 10px; */
+  position: relative;
+  width: 15px;
+  height: 15px;
+  bottom: 31px;
+ margin-left:50px;
 }

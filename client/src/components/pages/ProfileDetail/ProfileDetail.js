@@ -273,123 +273,132 @@ class ProfileDetails extends React.Component {
                 <Navbar />
                 <ToastContainer />
                 <div className="content-wrapper" >
+                    {/* item1 */}
+                    <div className="user-pic">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt="" />
+                        <div class="l-heading1"> Yixuan Wang
+                        {/* <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10" cy="10" r="10" fill="green" />
+                                </svg>
+                            </div>*/}
+                        </div>
 
+                        <ul className="list-group list-group-unbordered text-center">
+                            <li className="list-group-item">
+                                {this.state.oldProfilePhoto === "" && this.state.oldMultiPhotos.length === 0
+                                    ? "" : <span>
+                                        <button onClick={(e) => { this.handlelikes(e, 0) }} className="btn btn-primary" >Like {this.state.likes}</button>
+                                        <button onClick={(e) => { this.handlelikes(e, 1) }} className="btn btn-warning">Dislike {this.state.dislikes}</button>
+
+                                    </span>}
+                                <button onClick={(e) => { this.handleBlock(e) }} className="btn btn-danger" >Block</button>
+                                <button onClick={(e) => { this.handleReport(e) }} className="btn btn-danger">Report</button>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    {/* item2 */}
+                    <div className="profile-detail">
+                        <nav class="navbar navbar-light bg-light" style={{ 'border-radius': '10px' }}>
+                            <ul className="l-heading2">
+                                <li><a ref="">Profile</a></li>
+                                <li><a ref="">Pictures</a></li>
+                            </ul>
+                        </nav>
+
+                        <div class="detail-list">
+                            <div style={{ 'margin-top': '5px' }} >  Pseudo : {this.state.psudonym}</div>
+                        </div>
+                        <div class="detail-list">
+                            Age : {this.state.age}
+                        </div>
+                        <div class="detail-list">
+                            Gender : {this.state.gender}
+                        </div>
+                        <div class="detail-list">
+                            Location : {this.state.location}
+                        </div>
+                        <div class="detail-list">
+                            Sexual Orientation : {this.state.SexualOrientation}
+                        </div>
+                        <div class="detail-list">
+                            Profile Completion : {this.state.ProfileCompletion}
+                        </div>
+                        <div class="detail-list">
+                            Fame : {this.state.Fame}
+                        </div>
+                        <div class="detail-list">
+                            Interests :
+                            {this.state.selectedOption ? this.state.selectedOption.map((hobi, i) => {
+                            return <p key={i}>{hobi.label}</p>
+                        }) : ""}
+                        </div>
+                        <div class="detail-list">
+                            Bibliography : {this.state.Bibliography}
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div className="content-wrapper" >
                     <section className="content">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="box box-primary" id="fixMarginTop">
-                                    <div className="box-body box-profile">
-                                        {this.state.oldProfilePhoto && this.state.profilePhoto === "" ?
-                                            <img
-                                                className="profile-user-img img-responsive img-circle"
+                        <div class="container">
+                            <div class="profile-userpic">
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="box box-primary" id="fixMarginTop">
+                                            <div className="box-body box-profile">
+                                                {this.state.oldProfilePhoto && this.state.profilePhoto === "" ?
+                                                    <img
+                                                        className="profile-user-img img-responsive img-circle"
 
-                                                src={this.state.oldProfilePhoto.toString().substring(0, 4) !== 'http' ?
-                                                    process.env.REACT_APP_API_URL +
-                                                    "/" +
-                                                    this.state.oldProfilePhoto :
-                                                    this.state.oldProfilePhoto
-                                                }
-                                                alt="pic holder"
-                                            />
-                                            : ""}
+                                                        src={this.state.oldProfilePhoto.toString().substring(0, 4) !== 'http' ?
+                                                            process.env.REACT_APP_API_URL +
+                                                            "/" +
+                                                            this.state.oldProfilePhoto :
+                                                            this.state.oldProfilePhoto
+                                                        }
+                                                        alt="pic holder"
+                                                    />
+                                                    : ""}
 
 
-                                        <h3 className="profile-username text-center">
-                                            {this.state.firstname}{" "}
-                                            {this.state.lastname}
-                                        </h3>
+                                                <h4 className="profile-username text-center">
+                                                    {this.state.firstname}{" "}
+                                                    {this.state.lastname}
+                                                </h4>
 
-                                        <h5 style={{ 'fontSize': '16px' }} className="text-muted text-center">
-                                            {this.state.online === 0 ?
-                                                "Last login : " +
-                                                Moment().format('ll', this.state.updatedAt)
-                                                :
-                                                "this user is online"}
-                                        </h5>
-                                        <h5 style={{ 'fontSize': '12px' }} className="text-muted text-center">
-                                            {this.state.online === 0 ?
-                                                Moment(this.state.updatedAt).fromNow()
-                                                :
-                                                ""}
-                                        </h5>
 
-                                        <h5 style={{ 'fontSize': '12px' }} className="text-muted text-center">
-                                            {this.state.userHasLikedMe === true ?
-                                                "This User liked me" :
-                                                ""}
-                                        </h5>
+                                                <h5 style={{ 'fontSize': '12px' }} className="text-muted text-center">
+                                                    {this.state.online === 0 ?
+                                                        Moment(this.state.updatedAt).fromNow()
+                                                        :
+                                                        ""}
+                                                </h5>
 
-                                        <ul className="list-group list-group-unbordered text-center">
-                                            <li className="list-group-item">
-                                                {this.state.oldProfilePhoto === "" && this.state.oldMultiPhotos.length === 0
-                                                    ? "" : <span>
-                                                        <button onClick={(e) => { this.handlelikes(e, 0) }} className="btn btn-primary">Like {this.state.likes}</button>
-                                                        <button onClick={(e) => { this.handlelikes(e, 1) }} className="btn btn-warning">Dislike {this.state.dislikes}</button>
+                                                <h5 style={{ 'fontSize': '12px' }} className="text-muted text-center">
+                                                    {this.state.userHasLikedMe === true ?
+                                                        "This User liked me" :
+                                                        ""}
+                                                </h5>
 
-                                                    </span>}
-                                                <button onClick={(e) => { this.handleBlock(e) }} className="btn btn-danger">Block</button>
-                                                <button onClick={(e) => { this.handleReport(e) }} className="btn btn-danger">Report</button>
-                                            </li>
-                                        </ul>
+
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
 
+
+
                                 <div className="box box-primary">
-                                    <div className="box-header with-border">
-                                        <h3 className="box-title">About Me</h3>
-                                    </div>
+
                                     <div className="box-body">
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Pseudo : {this.state.psudonym}
-                                        </strong>
 
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Age : {this.state.age}
-                                        </strong>
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Gender : {this.state.gender}
-                                        </strong>
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Location : {this.state.location}
-                                        </strong>
-
-
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> SexualOrientation : {this.state.SexualOrientation}
-                                        </strong>
-
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Profile completion : {this.state.ProfileCompletion}
-                                        </strong>
-                                        <hr></hr>
-
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Fame : {this.state.Fame}
-                                        </strong>
-
-                                        <hr></hr>
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Interests :
-                                        </strong>
-
-                                        {this.state.selectedOption ? this.state.selectedOption.map((hobi, i) => {
-                                            return <p key={i}>{hobi.label}</p>
-                                        }) : ""}
-
-                                        <hr></hr>
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Images :
-                                        </strong>
 
                                         <div className="input-group image-preview col-md-10 col-md-offset-2">
                                             {this.state.oldMultiPhotos && this.state.multiPhotos.length === 0 ?
@@ -412,17 +421,15 @@ class ProfileDetails extends React.Component {
 
 
                                         <hr></hr>
-                                        <strong>
-                                            <i className=" margin-r-5"></i> Bibliography : {this.state.Bibliography}
-                                        </strong>
+
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                </div>
-            </div>
+                </div >
+            </div >
         );
     }
 }

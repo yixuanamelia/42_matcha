@@ -146,6 +146,8 @@ module.exports = class userDao {
             if (picturesProfile !== "") i++;
             if (otherPics !== "") i++;
 
+            console.log("otherPics :", userId, otherPics, picturesProfile);
+            console.log(" ====> ", i);
             resolve(i);
         })
     }

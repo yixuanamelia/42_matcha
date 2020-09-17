@@ -97,7 +97,7 @@ class EditProfile extends React.Component {
     e.preventDefault();
 
     console.log("this.state :", this.state);
-    
+
     if (this.validateData()) {
       let userEdited = await editThisUser(this.state);
 
@@ -190,7 +190,7 @@ class EditProfile extends React.Component {
       SexualOrientation: userInfo.sexual_orientation,
       ProfileCompletion: userInfo.profile_completion,
       gender: userInfo.gender,
-      // location: userInfo.localisation,
+      location: userInfo.localisation,
       Fame: userInfo.fame,
       Bibliography: userInfo.bio,
     })

@@ -16,6 +16,7 @@ import EditProfile from './components/pages/Profile/EditProfile';
 import ProfileDetail from './components/pages/ProfileDetail/ProfileDetail';
 import Notifications from './components/pages/Notifications/NotificationsHome.js';
 import Chat from './components/pages/Chat/chat';
+import Suggestion from './components/pages/Suggestion/Suggestion';
 
 // Third party libraries
 import decode from 'jwt-decode';
@@ -70,7 +71,7 @@ function App() {
           <AuthRoute exact path="/notifications" component={Notifications} />
           <AuthRoute exact path="/profiledetail/:id" component={ProfileDetail} />
           <AuthRoute exact path="/logout" component={Logout} />
-
+          <AuthRoute exact path="/suggestion" component={Suggestion} />
         </Switch>
       </Router>
     </div>

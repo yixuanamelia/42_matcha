@@ -80,7 +80,7 @@ class Navbar extends React.Component {
                 <div class="recpoint"></div> : null}
 
             </a>
-
+            <a href="/suggestion">Suggestion</a>
             <a href="/editprofile">Me</a>
             <a href="/logout">Logout</a>
           </div>

@@ -96,14 +96,12 @@ class EditProfile extends React.Component {
   async handlFormSubmitAction(e) {
     e.preventDefault();
 
-    console.log("this.state :", this.state);
-
     if (this.validateData()) {
       let userEdited = await editThisUser(this.state);
 
       if (userEdited.msg !== "" && userEdited.code !== 200)
-        customNotification.fireNotification("success", userEdited.msg)
-      else customNotification.fireNotification("error", userEdited.msg)
+        customNotification.fireNotification("error", userEdited.msg)
+      else customNotification.fireNotification("success", userEdited.msg)
 
       setTimeout(async () => {
         this.initPageProfileData()

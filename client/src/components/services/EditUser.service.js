@@ -39,7 +39,7 @@ export function editThisUser(data) {
                 await dataHttp.append('tags', data.selectedOption[i].value.toLowerCase());
             }
 
-        axios.put(process.env.REACT_APP_API_URL + "/users/" + userId, data, {
+        axios.put(process.env.REACT_APP_API_URL + "/users/" + userId, dataHttp, {
             headers: {
                 "Authorization": `Bearer ` + token
             }

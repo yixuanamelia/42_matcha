@@ -96,6 +96,8 @@ class EditProfile extends React.Component {
   async handlFormSubmitAction(e) {
     e.preventDefault();
 
+    console.log("this.state :", this.state);
+    
     if (this.validateData()) {
       let userEdited = await editThisUser(this.state);
 

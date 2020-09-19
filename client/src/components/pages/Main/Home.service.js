@@ -25,6 +25,9 @@ function CalculateDistance(userPos, userList) {
     var elementXY = [];
     var dist = 0;
 
+    if (userPos === undefined || userPos === "")
+        userPos = '48.8543,2.3527';
+
     userList.forEach(element => {
         elementXY = element.localisation.split(',');
         dist = getDistanceFromLatLonInKm(userXY[0], userXY[1], elementXY[0], elementXY[1]);
@@ -260,7 +263,7 @@ async function AddDistance(userList) {
 }
 
 export function fetchAllUsersPublicData(filter) {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
 
@@ -282,7 +285,7 @@ export function fetchAllUsersPublicData(filter) {
 
             })
             .catch(err => {
-                resolve(false);
+                resolve(err);
             })
     })
 }

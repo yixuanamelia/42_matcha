@@ -38,8 +38,8 @@ export class SearchBar extends Component {
             interests: this.state.selectedOption,
             rangeLocalisation: parseInt(this.state.rangeLocalisation)
         }]
-
-        await fetchAllUsersPublicData(filter);
+        let results = await fetchAllUsersPublicData(filter);
+        this.props.initUsersData(results);
     }
 
     onLowerBoundChange = (e) => {
@@ -64,9 +64,9 @@ export class SearchBar extends Component {
         this.initInterestArray(userInterest.data)
 
         let userLocation = await getUserLocation();
-        if (this.state.location === "" && userLocation.locateUser !== "") {
+        if (this.state.location === "" && userLocation !== "") {
             this.setState({
-                location: userLocation.locateUser
+                location: userLocation
             })
         }
     }

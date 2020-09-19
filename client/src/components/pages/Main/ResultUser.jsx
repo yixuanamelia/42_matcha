@@ -6,11 +6,7 @@ export class ResultUser extends Component {
     render() {
         const users = this.props.users;
 
-        console.log("users :", users)
         const userStyle = {
-            // display: 'grid',
-            // gridTemplateColumns: 'repeat(4, 1fr)',
-            // gridGap: '1rem'
             width: '100%',
             display: 'flex',
             'flexWrap': 'wrap',

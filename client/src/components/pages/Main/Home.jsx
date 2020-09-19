@@ -56,8 +56,7 @@ class Home extends React.Component {
         });
     }
 
-    updateSearch(e, data) {
-        e.preventDefault();
+    updateSearch(data) {
         this.setState({
             initialUsers: data,
             userBuffer: data
@@ -122,7 +121,7 @@ class Home extends React.Component {
                 <div className="">
                     <section className="">
                         <br />
-                        <SearchBar initUsers={(e) => this.updateSearch(e, [])} />
+                        <SearchBar initUsersData={this.updateSearch} />
                         <div style={{ padding: '2rem' }}>
                             <div style={{ backgroundColor: 'grey', height: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> <h4>SORT BY</h4></div>
                             <div style={{ backgroundColor: 'grey', height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

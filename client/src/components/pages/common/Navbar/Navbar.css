@@ -1,159 +1,149 @@
 /* Style the header with a grey background and some padding */
 .header {
-  overflow: hidden;
-  background-color: #e8519e;
-  padding: 0px 0px;
-  padding-top: 10px;
-  font-family: 'Yellowtail', cursive;
+	overflow: hidden;
+	background-color: #e8519e;
+	padding: 0px 0px;
+	padding-top: 10px;
+	font-family: 'Yellowtail', cursive;
 }
 
 /* Style the header links */
 .header a {
-  float: left;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
-  font-family: 'Yellowtail', cursive;
+	float: left;
+	color: white;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
+	font-family: 'Yellowtail', cursive;
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 25px;
-  font-weight: bold;
-  font-family: 'Yellowtail', cursive;
+	font-size: 25px;
+	font-weight: bold;
+	font-family: 'Yellowtail', cursive;
 }
-
-
-
 
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 
 /* Change the background color on mouse-over */
 .header a:hover {
-  background-color:#f79fcc;
-  color: white; 
-  font-family: 'Nunito', sans-serif;
-  font-family: 'Yellowtail', cursive;
+	background-color: #f79fcc;
+	color: white;
+	font-family: 'Nunito', sans-serif;
+	font-family: 'Yellowtail', cursive;
 }
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: #f79fcc;
-  color: white;
-  font-family: 'Yellowtail', cursive;
+	background-color: #f79fcc;
+	color: white;
+	font-family: 'Yellowtail', cursive;
 }
 
 /* Float the link section to the right */
 .header-right {
-  float: right;
+	float: right;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .header-right {
-    float: none;
-  }
+	.header a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.header-right {
+		float: none;
+	}
 }
 
 .notifnum {
-  background-color: rgb(147, 236, 135);
-  border-radius: 30px;
-  /* padding: 0px 10px; */
-  position: relative;
-  width: 15px;
-  height: 15px;
-  bottom: 31px;
-  left: 13px;
+	background-color: rgb(147, 236, 135);
+	border-radius: 30px;
+	/* padding: 0px 10px; */
+	position: relative;
+	width: 15px;
+	height: 15px;
+	bottom: 31px;
+	left: 13px;
 }
 
 .notifnum > span {
-  font-size: 11px;
-  color: white;
-  font-weight: bold;
-  position: relative;
-  bottom: 7px;
-  right: 0.3px;
-  font-family: sans-serif;
+	font-size: 11px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	bottom: 7px;
+	right: 0.3px;
+	font-family: sans-serif;
 }
-
-
-
 
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Kumbh+Sans:wght@300&display=swap');
 .notiflist {
-  
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 10px;
-  background-color:#eccee5;
-  padding: 20px 20px;
-  font-size:13px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Kumbh Sans', sans-serif;
-  z-index: 1111;
-  height: 300px;
-  overflow: auto;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 10px;
+	background-color: #eccee5;
+	padding: 20px 20px;
+	font-size: 13px;
+	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Kumbh Sans', sans-serif;
+	z-index: 1111;
+	height: 300px;
+	overflow: auto;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
-
 /*pop-up header*/
-.head  {
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Kumbh Sans', sans-serif;
+.head {
+	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Kumbh Sans', sans-serif;
 }
 
 .head > span {
-  padding-left:5px;
-  padding-right: 90px;
+	padding-left: 5px;
+	padding-right: 90px;
 }
 
 .head a {
- padding-right: 5px;
- padding-bottom: 30px;
-  font-size:13px;
-  color:black;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Kumbh Sans', sans-serif;
+	padding-right: 5px;
+	padding-bottom: 30px;
+	font-size: 13px;
+	color: black;
+	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Kumbh Sans', sans-serif;
 }
 
 .recpoint {
-  position: absolute;
-  right: 125px;
-  top: 55px;
-  background-color: transparent;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid #f79fcc;
+	position: absolute;
+	right: 125px;
+	top: 55px;
+	background-color: transparent;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 20px solid #f79fcc;
 }
 
-
-
 .singlenotif {
-  display: flex;
-  flex-direction: column;
-  padding: 10px 10px;
-  border: 1px solid white;
-  border-radius: 10px;
-  margin: 10px 5px;
+	display: flex;
+	flex-direction: column;
+	padding: 10px 10px;
+	border: 1px solid white;
+	border-radius: 10px;
+	margin: 10px 5px;
 }
 
 .singlenotif > span {
-  font-size: 10px;
-  margin-top: 6px;
-  opacity: 0.5;
-  align-self: flex-end;  
+	font-size: 10px;
+	margin-top: 6px;
+	opacity: 0.5;
+	align-self: flex-end;
 }

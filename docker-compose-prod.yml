@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  
+  server_dev:
+    container_name: matcha_server_dev
+    build: ./server/
+    environment:
+      - VIRTUAL_HOST=si.matcha.local
+    volumes : 
+      - ./server/:/usr/src/app:rw
+    ports:
+      - "3000:3000"
+    command: "nodemon ./bin/www --inspect --legacy-watch"
+    links:
+      - "mysql:matcha_phpmyadmin"
+      
+  
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - .env
+    volumes:
+      - ./.docker/data/mysql/:/var/lib/mysql
+      - ./.docker/logs/mysql/:/var/log/mysql
+    ports:
+      - "3307:3306"
+    container_name: matcha_mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      -  8080:80
+    env_file:
+      - .env
+    environment:
+      PMA_HOST: mysql
+      VIRTUAL_HOST: phpmyadmin.matcha.local  
+    container_name: matcha_phpmyadmin
+
+  client_dev:
+    container_name: matcha_app
+    build: client/
+    environment:
+      - VIRTUAL_HOST=app.matcha.local
+    volumes : 
+      - ./client/:/usr/src/app:rw
+    ports:
+      - 80:5000
+    command: "npm run start-deploy"

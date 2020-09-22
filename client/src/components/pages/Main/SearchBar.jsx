@@ -199,6 +199,7 @@ const filterStyle = {
 	backgroundColor: '#f0c6dc',
 	marginTop: '2rem',
 	'border-radius': '20px',
+	color: '#443737',
 };
 
 const textStyle = {

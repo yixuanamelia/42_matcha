@@ -60,10 +60,10 @@ db.connect(function (err) {
 });
 
 // Database tables initiation
-// initDatabase.initDatabaseTables(db)
+//initDatabase.initDatabaseTables(db)
 
 // Database tables seed
-// seed(db);
+//seed(db);
 
 // Catch errors on database connection failure
 db.on('error', function (err) {

@@ -130,7 +130,7 @@ class Home extends React.Component {
 								{' '}
 								<p
 									style={{
-										color: 'dark',
+										color: '#443737',
 										'font-size': '25px',
 										'padding-bottom': '10px',
 										'font-family': 'Nunito, sans-serif',
@@ -141,8 +141,8 @@ class Home extends React.Component {
 							</div>
 							<div
 								style={{
-									backgroundColor: '#13243c',
-									height: '5rem',
+									backgroundColor: '#443737',
+									height: '4rem',
 									display: 'flex',
 									justifyContent: 'center',
 									alignItems: 'center',
@@ -200,6 +200,10 @@ class Home extends React.Component {
 	}
 }
 
-const somemargin = { textAlign: 'center', width: '24%', color: 'white' };
+const somemargin = {
+	textAlign: 'center',
+	width: '24%',
+	color: 'white',
+};
 
 export default Home;

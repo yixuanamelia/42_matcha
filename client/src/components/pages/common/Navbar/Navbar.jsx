@@ -47,7 +47,6 @@ class Navbar extends React.Component {
 	showPopList = async (e) => {
 		e.preventDefault();
 		let response = await GetuserNotifes();
-		console.log('response.data :', response.data);
 		if (response.code === 200)
 			this.setState({
 				notifs: response.data,

@@ -2,7 +2,7 @@
 accountCreationToken = (token) => {
     let msg = `Hello ! \n  \
     \n Here is your token for the validation : \
-    http://localhost:3000/users/validateaccount/${token} \
+    ${process.env.SERVER_URL}/users/validateaccount/${token} \
     \n MATCHA TEAM`
 
     return msg

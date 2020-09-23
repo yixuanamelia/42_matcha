@@ -65,7 +65,7 @@ function App() {
 				<Switch>
 					<Route exact path='/signup' component={Signup} />
 					<Route exact path='/login' component={Login} />
-					<Route exact path='/editprofile' component={EditProfile} />
+					<AuthRoute exact path='/editprofile' component={EditProfile} />
 					<Route exact path='/forgotPass' component={ForgotPass} />
 					<AuthRoute exact path='/' component={Home} />
 					<AuthRoute exact path='/chatroom' component={Chat} />

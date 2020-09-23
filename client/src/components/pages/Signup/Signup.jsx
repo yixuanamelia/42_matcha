@@ -101,13 +101,13 @@ class Signup extends React.Component {
 
                             <div className="wrap-input100 validate-input" data-validate="Password is required">
                                 <span className="label-input100">Password</span>
-                                <input className="input100" type="text" onChange={this.handleChange} name="password" placeholder="*************" required />
+                                <input className="input100" type="password" onChange={this.handleChange} name="password" placeholder="*************" required />
                                 <span className="focus-input100"></span>
                             </div>
 
                             <div className="wrap-input100 validate-input" data-validate="Repeat Password is required">
                                 <span className="label-input100">Repeat Password</span>
-                                <input className="input100" type="text" onChange={this.handleChange} name="confPassword" placeholder="*************" required />
+                                <input className="input100" type="password" onChange={this.handleChange} name="confPassword" placeholder="*************" required />
                                 <span className="focus-input100"></span>
                             </div>
 

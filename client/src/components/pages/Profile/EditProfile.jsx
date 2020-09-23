@@ -174,6 +174,9 @@ class EditProfile extends React.Component {
 
     let userInterests = data.tags;
 
+    if (userInfo.localisation !== "undefined")
+      this.setState({ location: userInfo.localisation })
+
     this.setState({
       firstname: userInfo.firstname,
       psudonym: userInfo.pseudo,
@@ -188,7 +191,6 @@ class EditProfile extends React.Component {
       SexualOrientation: userInfo.sexual_orientation,
       ProfileCompletion: userInfo.profile_completion,
       gender: userInfo.gender,
-      location: userInfo.localisation,
       Fame: userInfo.fame,
       Bibliography: userInfo.bio,
     })

@@ -249,3 +249,8 @@
 .chatroom-wdg {
 	display: flex;
 }
+
+.list-unstyled { 
+	display: flex;
+	flex-direction: column;
+}

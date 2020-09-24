@@ -208,12 +208,12 @@ class Chat extends React.Component {
 				return {
 					pos:
 						msg.source_user_id ===
-						parseInt(this.state.messagesInfo.source_userId)
+							parseInt(this.state.messagesInfo.source_userId)
 							? 'right'
 							: 'left',
 					photo:
 						msg.source_user_id ===
-						parseInt(this.state.messagesInfo.source_userId)
+							parseInt(this.state.messagesInfo.source_userId)
 							? this.state.profilePhoto
 							: this.state.messagesInfo.dest_photo,
 					msgData: msg.message_text,
@@ -230,6 +230,12 @@ class Chat extends React.Component {
 	}
 
 	render() {
+		let styleLeft = {
+			fontSize: '11px',
+			fontFamily: 'Kumbh Sans, sans-serif',
+			paddingLeft: '10px',
+		}
+
 		return (
 			<div>
 				<Navbar />
@@ -254,45 +260,45 @@ class Chat extends React.Component {
 								<ul className='list-unstyled'>
 									{this.state.allUserChatContact
 										? this.state.allUserChatContact.map((user, i) => {
-												return user.profilePhoto !== '' ? (
-													<li
-														key={i}
-														onClick={(e) => {
-															this.selectChatContact(e, user);
-														}}
-														className='left clearfix'>
-														<span className='chat-img pull-left'>
-															<img
-																src={
+											return user.profilePhoto !== '' ? (
+												<li
+													key={i}
+													onClick={(e) => {
+														this.selectChatContact(e, user);
+													}}
+													className='left clearfix'>
+													<span className='chat-img pull-left'>
+														<img
+															src={
+																user.profilePhoto
+																	.toString()
+																	.substring(0, 5) === 'https'
+																	? user.profilePhoto
+																	: process.env.REACT_APP_API_URL +
+																	'/' +
 																	user.profilePhoto
-																		.toString()
-																		.substring(0, 5) === 'https'
-																		? user.profilePhoto
-																		: process.env.REACT_APP_API_URL +
-																		  '/' +
-																		  user.profilePhoto
-																}
-																alt='User Avatar'
-																className='img-circle'
-															/>
-														</span>
-														<div className='chat-body clearfix'>
-															<div className='header_sec'>
-																<strong className='primary-font'>
-																	{user.fullname}
-																</strong>
-																{/* <strong className="pull-right"> */}
-																{/* 09:45AM</strong> */}
-															</div>
-															<div className='contact_sec'>
-																{/* <strong className="primary-font">(123) 123-456</strong> <span className="badge pull-right">3</span> */}
-															</div>
+															}
+															alt='User Avatar'
+															className='img-circle'
+														/>
+													</span>
+													<div className='chat-body clearfix'>
+														<div className='header_sec'>
+															<strong className='primary-font'>
+																{user.fullname}
+															</strong>
+															{/* <strong className="pull-right"> */}
+															{/* 09:45AM</strong> */}
 														</div>
-													</li>
-												) : (
+														<div className='contact_sec'>
+															{/* <strong className="primary-font">(123) 123-456</strong> <span className="badge pull-right">3</span> */}
+														</div>
+													</div>
+												</li>
+											) : (
 													''
 												);
-										  })
+										})
 										: ''}
 								</ul>
 							</div>
@@ -307,19 +313,19 @@ class Chat extends React.Component {
 										? this.state.initChatMessage
 										: ''}
 									{this.state.messagesInfo.length !== 0 &&
-									this.state.messagesInfo.messages.length === 0 ? (
-										<li className='left clearfix'>
-											<div className='chat-body1 clearfix'>
-												<p>
-													Now chatting with{' '}
-													<b>{this.state.messagesInfo.dest_fullname}</b>
-												</p>
-												<div className='chat_time pull-right'>09:40PM</div>
-											</div>
-										</li>
-									) : (
-										''
-									)}
+										this.state.messagesInfo.messages.length === 0 ? (
+											<li className='left clearfix'>
+												<div className='chat-body1 clearfix'>
+													<p>
+														Now chatting with{' '}
+														<b>{this.state.messagesInfo.dest_fullname}</b>
+													</p>
+													<div className='chat_time pull-right'>09:40PM</div>
+												</div>
+											</li>
+										) : (
+											''
+										)}
 
 									{/* <li className="left clearfix">
                                                                <span className="chat-img1 pull-left">
@@ -332,36 +338,69 @@ class Chat extends React.Component {
                                                             </li> */}
 
 									{this.state.messagesInfo.length !== 0 &&
-									this.state.messagesInfo.messages.length > 0
+										this.state.messagesInfo.messages.length > 0
 										? this.state.messagesInfo.messages.map((msg, i) => {
-												return (
-													<li key={i} className='left clearfix admin_chat'>
-														<span className={'chat-img1 pull-' + msg.pos}>
-															<img
-																src={
-																	msg.photo.toString().substring(0, 5) ===
+											return (
+												<li key={i} className='left clearfix admin_chat'>
+													<span className={'chat-img1 pull-' + msg.pos}>
+														<img
+															src={
+																msg.photo.toString().substring(0, 5) ===
 																	'https'
-																		? msg.photo
-																		: process.env.REACT_APP_API_URL +
-																		  '/' +
-																		  msg.photo
-																}
-																alt='User Avatar'
-																className='img-circle'
-															/>
-														</span>
-														<div className='chat-body1 clearfix'>
-															<p>{msg.msgData}</p>
-															<div className='chat_time pull-left'>
-																{Moment(msg.date).fromNow()}
-															</div>
+																	? msg.photo
+																	: process.env.REACT_APP_API_URL +
+																	'/' +
+																	msg.photo
+															}
+															alt='User Avatar'
+															className='img-circle'
+														/>
+													</span>
+													<div style={{marginLeft:  msg.pos == "left" ? '50px' : "0px"}} className='chat-body1 clearfix'>
+														<p style={{background: msg.pos == "left" ? "silver" : "#666666"}} >{msg.msgData}</p>
+														<div className='chat_time pull-left'>
+															{Moment(msg.date).fromNow()}
 														</div>
-													</li>
-												);
-										  })
+													</div>
+												</li>
+											);
+										})
 										: ''}
 
-									<li style={{ marginBottom: '1.5vw' }} id='content'></li>
+									{/* <li className='left clearfix admin_chat'>
+										<span className={'chat-img1 pull-left'}>
+											<img
+												src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg"
+												alt='User Avatar'
+												className='img-circle'
+											/>
+										</span>
+										<div style={{marginLeft: '50px'}} className='chat-body1 clearfix'>
+											<p style={{background: "silver"}} >Lorem ipsum dolor sit amet consectetur.</p>
+											<div className='chat_time pull-left'>
+												12/02/2020 12:30pm
+											</div>
+										</div>
+									</li>
+
+
+									<li className='left clearfix admin_chat'>
+										<span className={'chat-img1 pull-right'}>
+											<img
+												src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg"
+												alt='User Avatar'
+												className='img-circle'
+											/>
+										</span>
+										<div className='chat-body1 clearfix'>
+											<p>Lorem ipsum dolor sit amet consectetur.</p>
+											<div className='chat_time pull-right'>
+												12/02/2020 12:30pm
+											</div>
+										</div>
+									</li>
+
+									<li style={{ marginBottom: '1.5vw' }} id='content'></li> */}
 								</ul>
 							</div>
 

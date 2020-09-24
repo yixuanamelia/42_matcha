@@ -93,6 +93,7 @@ module.exports = class userDao {
         await this.execQuery(preparedQuery);
     }
 
+    // Fame formulat
     async calculateUserFame(userId) {
         return new Promise(async (resolve, reject) => {
             // formula : fame : like + visit - dislike - report(4) - block(2)

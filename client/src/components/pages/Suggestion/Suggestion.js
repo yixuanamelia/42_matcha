@@ -7,6 +7,7 @@ import { fetchAllUsersPublicData } from '../../pages/Main/Home.service';
 import SuggestionList from './SuggestionList';
 import { GetUserIntrests } from '../../services/GetAllInterests.service';
 import Navbar from '../common/Navbar/Navbar';
+import Footer from '../common/Footer/Footer';
 
 export class Suggestion extends Component {
 
@@ -122,6 +123,7 @@ export class Suggestion extends Component {
             </section>
           </section>
         </div>
+        <Footer />
      </div>
     )
   }

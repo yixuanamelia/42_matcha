@@ -7,6 +7,7 @@ import Navbar from '../common/Navbar/Navbar';
 import { fetchAllUsersPublicData } from './Home.service';
 import sort from 'fast-sort';
 import { GetUserIntrests } from './interest.service';
+import Footer from '../common/Footer/Footer';
 
 class Home extends React.Component {
 	constructor(props) {
@@ -195,6 +196,7 @@ class Home extends React.Component {
 						<ResultUser users={filteredUsers} />
 					</section>
 				</div>
+				<Footer />
 			</div>
 		);
 	}

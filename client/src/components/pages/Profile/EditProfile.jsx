@@ -7,6 +7,7 @@ import { GetUserInfo } from '../../services/FetchUserInfo.service';
 import { GetUserIntrests } from '../../services/GetAllInterests.service';
 import { getUserLocation } from '../../services/GetUserLocation.service';
 import Select from 'react-select';
+import Footer from '../common/Footer/Footer';
 
 const customNotification = require('../utils/notification');
 
@@ -520,6 +521,7 @@ class EditProfile extends React.Component {
           </section>
 
         </div>
+        <Footer />
       </div >
     )
   }

@@ -9,6 +9,7 @@ import { VisitThisUser } from '../../services/VisitUser.service';
 import Moment from 'moment';
 import { PutUpdateUserUnlikes } from '../../services/UpdateUserUnlikes.service';
 import { reportThisUser } from '../../services/ReportUser.service';
+import Footer from '../common/Footer/Footer';
 
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
@@ -502,6 +503,7 @@ class ProfileDetails extends React.Component {
 						</div>
 					</section>
 				</div>
+				<Footer />
 			</div>
 		);
 	}

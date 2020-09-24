@@ -7,6 +7,7 @@ import { GetCurrentUserInfo } from '../../services/FetchCurrentUserInfo.service'
 import { saveUserChatAction } from '../../services/SaveUserchatMsg.service';
 import { GetuserChatMsg } from '../../services/GetUserChatMessages.service';
 import io from 'socket.io-client';
+import Footer from '../common/Footer/Footer';
 
 class Chat extends React.Component {
 	constructor(props) {
@@ -421,6 +422,7 @@ class Chat extends React.Component {
 						</div>
 					</div>
 				</div>
+				<Footer />
 			</div>
 		);
 	}

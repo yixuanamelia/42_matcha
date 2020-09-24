@@ -50,6 +50,26 @@ class EditProfile extends React.Component {
   validateData() {
     let regLocation = new RegExp(/^([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$/)
 
+    try {
+      for (let i = 0; i < this.state.multiPhotos.length; i++) {
+        if (this.state.multiPhotos[i].type !== "image/jpeg"
+          && this.state.multiPhotos[i].type !== "image/png") {
+          alert('dd')
+          customNotification.fireNotification("warning", "File " + this.state.multiPhotos[i].type + " format not supported")
+          return false;
+        }
+      }
+
+      if (this.state.profilePhoto !== "" && this.state.profilePhoto !== undefined && this.state.profilePhoto.type !== "image/jpeg" && this.state.profilePhoto.type !== "image/png") {
+        customNotification.fireNotification("warning", "File " + this.state.profilePhoto.type + " format not supported")
+        return false;
+      }
+
+    } catch (err) {
+      customNotification.fireNotification("warning", "File format not supported")
+      return false;
+    }
+
     if (this.state.multiPhotos.length > 4) {
       // Add extension validation only for img known formats
       customNotification.fireNotification("warning", "You cn not upload more than 4 pictures")

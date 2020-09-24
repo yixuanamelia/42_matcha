@@ -297,10 +297,6 @@ class ProfileDetails extends React.Component {
 							{this.state.firstname} {this.state.lastname}
 							<div className={this.state.online ? "online-status on" : "online-status off"}></div>
 						</div>
-						{/* TODO:add online status green dot <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="10" cy="10" r="10" fill="green" />
-                                </svg>
-                            </div> */}
 
 						<ul className='list-group list-group-unbordered text-center'>
 							<li className='list-group-item'>

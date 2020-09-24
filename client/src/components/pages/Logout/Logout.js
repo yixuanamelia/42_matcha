@@ -1,9 +1,11 @@
 import React from "react";
 import { createBrowserHistory } from "history";
+import { UserLogout } from "../../services/UserLogout.service";
 
 class Logout extends React.Component {
 
     async UNSAFE_componentWillMount() {
+        await UserLogout();
         let history = createBrowserHistory();
         localStorage.setItem('token', "");
         localStorage.setItem('userId', "");

@@ -48,11 +48,13 @@ class ProfileDetails extends React.Component {
 			Fame: '',
 			Bibliography: '',
 			selectedOption: [],
+			showLikes: false,
 		};
 
 		this.handlelikes = this.handlelikes.bind(this);
 		this.handleBlock = this.handleBlock.bind(this);
 		this.handleReport = this.handleReport.bind(this);
+		this.checkShowLikes = this.checkShowLikes.bind(this);
 	}
 
 	async handleBlock(e) {
@@ -208,6 +210,19 @@ class ProfileDetails extends React.Component {
 		});
 	}
 
+	checkShowLikes(userActionInfo) {
+		try {
+			if (userActionInfo.data.pictures.length > 0) {
+				userActionInfo.data.pictures.map(pc => {
+					if (pc.state === 1)
+						this.setState({ showLikes: true })
+				})
+			}
+		} catch (err) {
+
+		}
+	}
+
 	async UNSAFE_componentWillMount() {
 		let userId = this.props.match.params.id;
 		let usInfo = await GetUserInfo(userId);
@@ -215,6 +230,7 @@ class ProfileDetails extends React.Component {
 		let usLikes = await getUserLikes(userId);
 		let usVivsit = await VisitThisUser(userId);
 		let userAction = localStorage.getItem('userId');
+		let userActionInfo = await GetUserInfo(userAction);
 
 		if (usLikes.data !== undefined)
 			this.setState({
@@ -222,6 +238,7 @@ class ProfileDetails extends React.Component {
 				dislikes: usLikes.data.dislikes,
 			});
 
+		this.checkShowLikes(userActionInfo);
 		if (usInfo.data !== undefined) this.initProfileInformation(usInfo.data);
 
 		if (usInterest !== undefined && usInterest.code === 200)
@@ -300,8 +317,7 @@ class ProfileDetails extends React.Component {
 
 						<ul className='list-group list-group-unbordered text-center'>
 							<li className='list-group-item'>
-								{this.state.oldProfilePhoto === '' &&
-									this.state.oldMultiPhotos.length === 0 ? (
+								{this.state.showLikes === false ? (
 										''
 									) : (
 										<span>

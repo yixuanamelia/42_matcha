@@ -51,6 +51,7 @@ class EditProfile extends React.Component {
     let regLocation = new RegExp(/^([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$/)
 
     if (this.state.multiPhotos.length > 4) {
+      // Add extension validation only for img known formats
       customNotification.fireNotification("warning", "You cn not upload more than 4 pictures")
       return false;
     } else if (18 > parseInt(this.state.age) > 120) {
@@ -286,6 +287,7 @@ class EditProfile extends React.Component {
                 <label for="name">First Name</label>
                 <input type="text"
                   value={this.state.firstname}
+                  name="firstname"
                   className="form-control"
                   onChange={this.handleChange}
                   id="f-name" placeholder="John/Jane" />

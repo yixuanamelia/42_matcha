@@ -93,7 +93,6 @@ module.exports = class userDao {
         await this.execQuery(preparedQuery);
     }
 
-    // Fame formulat
     async calculateUserFame(userId) {
         return new Promise(async (resolve, reject) => {
             // formula : fame : like + visit - dislike - report(4) - block(2)
@@ -126,6 +125,17 @@ module.exports = class userDao {
             else
                 resolve(false);
         })
+    }
+
+    // FormValidation
+    validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    validatePassword(pwd) {
+        const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        return re.test(String(pwd).toLowerCase());
     }
 
     calculateProfileCompletion(userId, data) {

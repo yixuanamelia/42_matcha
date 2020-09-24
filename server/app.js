@@ -63,7 +63,7 @@ db.connect(function (err) {
 // initDatabase.initDatabaseTables(db)
 
 // Database tables seed
-//seed(db);
+seed(db);
 
 // Catch errors on database connection failure
 db.on('error', function (err) {

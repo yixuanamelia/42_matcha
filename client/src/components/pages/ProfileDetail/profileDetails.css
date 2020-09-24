@@ -17,7 +17,7 @@
 
   .l-heading1{
     padding-top:25px;
-    font-size: 35px;
+    font-size: 25px;
     text-align:center;
   }
   .l-heading2 {
@@ -140,18 +140,20 @@ ul {
 
 }
 
-.online-status{
-    margin-left:100px;
+.on {
+  background-color: rgb(147, 236, 135);
+}
 
+.off {
+  background-color: grey;
 }
 
 .online-status {
-  background-color: rgb(147, 236, 135);
   border-radius: 30px;
   /* padding: 0px 10px; */
   position: relative;
-  width: 15px;
-  height: 15px;
-  bottom: 31px;
- margin-left:50px;
+  width: 20px;
+  height: 20px;
+  bottom: 25px;
+ margin-left:30px;
 }

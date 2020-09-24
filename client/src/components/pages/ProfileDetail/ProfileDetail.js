@@ -267,20 +267,35 @@ class ProfileDetails extends React.Component {
 				<div className='content-wrapper'>
 					{/* item1 */}
 					<div className='user-pic'>
-						<img
-							src='https://bootdey.com/img/Content/avatar/avatar6.png'
-							style={{
-								height: '250px',
-								'border-radius': '50%',
-								border: '5px solid #FEDE00',
-								'margin-top': '30px',
-							}}
-							class='img-responsive'
-							alt=''
-						/>
+						{this.state.oldProfilePhoto &&
+							this.state.profilePhoto === '' ? (
+								<img
+									src={
+										this.state.oldProfilePhoto
+											.toString()
+											.substring(0, 4) !== 'http'
+											? process.env.REACT_APP_API_URL +
+											'/' +
+											this.state.oldProfilePhoto
+											: this.state.oldProfilePhoto
+									} style={{
+										height: '150px',
+										width: "150px",
+										marginLeft: '25%',
+										'border-radius': '50%',
+										border: '5px solid #FEDE00',
+										'margin-top': '30px',
+									}}
+									class='img-responsive'
+									alt=''
+								/>
+							) : (
+								''
+							)}
+
 						<div className='l-heading1'>
 							{this.state.firstname} {this.state.lastname}
-							<div class='online-status'></div>
+							<div className={this.state.online ? "online-status on" : "online-status off"}></div>
 						</div>
 						{/* TODO:add online status green dot <div className="online-status">    <svg xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="10" cy="10" r="10" fill="green" />
@@ -290,26 +305,26 @@ class ProfileDetails extends React.Component {
 						<ul className='list-group list-group-unbordered text-center'>
 							<li className='list-group-item'>
 								{this.state.oldProfilePhoto === '' &&
-								this.state.oldMultiPhotos.length === 0 ? (
-									''
-								) : (
-									<span>
-										<button
-											onClick={(e) => {
-												this.handlelikes(e, 0);
-											}}
-											className='btn btn-primary'>
-											Like {this.state.likes}
-										</button>
-										<button
-											onClick={(e) => {
-												this.handlelikes(e, 1);
-											}}
-											className='btn btn-warning'>
-											Dislike {this.state.dislikes}
-										</button>
-									</span>
-								)}
+									this.state.oldMultiPhotos.length === 0 ? (
+										''
+									) : (
+										<span>
+											<button
+												onClick={(e) => {
+													this.handlelikes(e, 0);
+												}}
+												className='btn btn-primary'>
+												Like {this.state.likes}
+											</button>
+											<button
+												onClick={(e) => {
+													this.handlelikes(e, 1);
+												}}
+												className='btn btn-warning'>
+												Dislike {this.state.dislikes}
+											</button>
+										</span>
+									)}
 								<button
 									onClick={(e) => {
 										this.handleBlock(e);
@@ -363,8 +378,8 @@ class ProfileDetails extends React.Component {
 							Interests :
 							{this.state.selectedOption
 								? this.state.selectedOption.map((hobi, i) => {
-										return <p key={i}>{hobi.label}</p>;
-								  })
+									return <p key={i}>{hobi.label}</p>;
+								})
 								: ''}
 						</div>
 						<div class='detail-list'>
@@ -391,23 +406,23 @@ class ProfileDetails extends React.Component {
 										<div className='box box-primary' id='fixMarginTop'>
 											<div className='box-body box-profile'>
 												{this.state.oldProfilePhoto &&
-												this.state.profilePhoto === '' ? (
-													<img
-														className='profile-user-img img-responsive img-circle'
-														src={
-															this.state.oldProfilePhoto
-																.toString()
-																.substring(0, 4) !== 'http'
-																? process.env.REACT_APP_API_URL +
-																  '/' +
-																  this.state.oldProfilePhoto
-																: this.state.oldProfilePhoto
-														}
-														alt='pic holder'
-													/>
-												) : (
-													''
-												)}
+													this.state.profilePhoto === '' ? (
+														<img
+															className='profile-user-img img-responsive img-circle'
+															src={
+																this.state.oldProfilePhoto
+																	.toString()
+																	.substring(0, 4) !== 'http'
+																	? process.env.REACT_APP_API_URL +
+																	'/' +
+																	this.state.oldProfilePhoto
+																	: this.state.oldProfilePhoto
+															}
+															alt='pic holder'
+														/>
+													) : (
+														''
+													)}
 
 												<h5
 													style={{ fontSize: '12px' }}
@@ -433,30 +448,30 @@ class ProfileDetails extends React.Component {
 									<div className='box-body'>
 										<div className='input-group image-preview col-md-10 col-md-offset-2'>
 											{this.state.oldMultiPhotos &&
-											this.state.multiPhotos.length === 0
+												this.state.multiPhotos.length === 0
 												? this.state.oldMultiPhotos.map(
-														(oldProfilePhoto, index) => {
-															return (
-																<img
-																	key={index}
-																	style={{
-																		position: 'relative',
-																		float: 'left',
-																		width: '200px',
-																	}}
-																	className='img-responsive center-block'
-																	src={
-																		oldProfilePhoto.indexOf('http') !== 1
-																			? process.env.REACT_APP_API_URL +
-																			  '/' +
-																			  oldProfilePhoto
-																			: oldProfilePhoto
-																	}
-																	alt='pic holder'
-																/>
-															);
-														}
-												  )
+													(oldProfilePhoto, index) => {
+														return (
+															<img
+																key={index}
+																style={{
+																	position: 'relative',
+																	float: 'left',
+																	width: '200px',
+																}}
+																className='img-responsive center-block'
+																src={
+																	oldProfilePhoto.indexOf('http') !== 1
+																		? process.env.REACT_APP_API_URL +
+																		'/' +
+																		oldProfilePhoto
+																		: oldProfilePhoto
+																}
+																alt='pic holder'
+															/>
+														);
+													}
+												)
 												: ''}
 										</div>
 										<div>

@@ -313,13 +313,31 @@ class ProfileDetails extends React.Component {
 						<div className='l-heading1'>
 							{this.state.firstname} {this.state.lastname}
 							<div className={this.state.online ? "online-status on" : "online-status off"}></div>
+
+							<div>
+								<h5
+									style={{ fontSize: '12px' }}
+									className='text-muted text-center'>
+									{this.state.online === 0
+										? "This user Was online " + Moment(this.state.updatedAt).fromNow()
+										: ''}
+								</h5>
+
+								<h5
+									style={{ fontSize: '12px' }}
+									className='text-muted text-center'>
+									{this.state.userHasLikedMe === true
+										? 'This User liked me'
+										: ''}
+								</h5>
+							</div>
 						</div>
 
 						<ul className='list-group list-group-unbordered text-center'>
 							<li className='list-group-item'>
 								{this.state.showLikes === false ? (
-										''
-									) : (
+									''
+								) : (
 										<span>
 											<button
 												onClick={(e) => {
@@ -436,21 +454,6 @@ class ProfileDetails extends React.Component {
 														''
 													)}
 
-												<h5
-													style={{ fontSize: '12px' }}
-													className='text-muted text-center'>
-													{this.state.online === 0
-														? Moment(this.state.updatedAt).fromNow()
-														: ''}
-												</h5>
-
-												<h5
-													style={{ fontSize: '12px' }}
-													className='text-muted text-center'>
-													{this.state.userHasLikedMe === true
-														? 'This User liked me'
-														: ''}
-												</h5>
 											</div>
 										</div>
 									</div>

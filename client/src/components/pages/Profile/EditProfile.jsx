@@ -55,7 +55,6 @@ class EditProfile extends React.Component {
       for (let i = 0; i < this.state.multiPhotos.length; i++) {
         if (this.state.multiPhotos[i].type !== "image/jpeg"
           && this.state.multiPhotos[i].type !== "image/png") {
-          alert('dd')
           customNotification.fireNotification("warning", "File " + this.state.multiPhotos[i].type + " format not supported")
           return false;
         }

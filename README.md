@@ -7,6 +7,7 @@ Matcha is a dating web application.
 
 ## Team 
 	- Yixuan WANG - yiwang@student.42.fr
+	- Abdeljalil Naceur -abnaceur@student.42.fr
 
 
 ## Project's Goals and objectives
